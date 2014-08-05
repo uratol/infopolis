@@ -1,2 +1,9 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<% provide :title, full_title('Home') %>
+
+
+<div class="center hero-unit">
+  <h2>Welcome to the Report system</h1>
+
+  <%= link_to "Sign in!", '#', class: "btn btn-large btn-primary" %>
+</div>
+
