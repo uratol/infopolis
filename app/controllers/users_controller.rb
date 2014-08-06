@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "User #{ user_full_name(@user) } registered"
-      redirect_to '/'
+      redirect_to users_path
       #redirect_to @user
     else
       flash[:error] = "User not registered"

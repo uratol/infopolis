@@ -1,6 +1,13 @@
 class SessionsController < ApplicationController
+  
+=begin  
+  class Session
+    attr_accessor :name
+  end
+  
+=end
+
   def new
-    
   end
   
   def create
@@ -12,6 +19,8 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:error] = 'Invalid email/password combination'
+      #@session.email = params[:session][:email]
+      @email_prev = params[:session][:email]
       render 'new'
     end
   end

@@ -20,6 +20,10 @@ module SessionsHelper
     !current_user.nil?
   end
   
+  def signed_admin?
+    signed_in? && current_user.admin? 
+  end
+  
   def sign_out
     current_user.update_attribute(:remember_token,
                                   User.encrypt(User.new_remember_token))
