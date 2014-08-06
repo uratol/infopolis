@@ -1,35 +1,24 @@
-<table>
-  <thead>
-	<tr>
-	  <th>
-	    Name
-	  </th>
-	  <th>
-	    Email
-      </th>
-	  <th>
-	  	Edit
-	  </th>
-	  <th>
-	  	Delete
-	  </th>
-	</tr>
-  </thead>
-  <tbody>
-<%= @users.each do |u| %>
-<td>	
-<%= u.name %>
-</td>
-<td>
-<%= u.email %>
-</td>
-<td>
-  <%= link_to "Edit", '#' %>
-</td>
-<td>
-  <%= link_to "Delete", '#' %>
-</td>
-<% end %>
-  </tbody>
-</table>
-  
+<%= provide(:title, "Users") %>
+<div class="center hero-unit">
+	<table>
+		<thead>
+			<tr>
+				<th> Name </th>
+				<th> Email </th>
+				<th> Edit </th>
+				<th> Delete </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @users.each do |u| %>
+			<tr>
+				<td> <%= u.name %> </td>
+				<td> <%= u.email %> </td>
+				<td> <%= link_to "Edit", edit_user_path(u) %> </td>
+				<td> <%= link_to "Delete", user_path(u), method: :delete %> </td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+  <%= link_to "New user", new_user_path, class: "btn btn-large btn-primary" %>
+</div>
