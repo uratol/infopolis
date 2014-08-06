@@ -1,0 +1,13 @@
+<%= provide(:title, "Sign in") %>
+<div class="center hero-unit">
+
+	<%= form_for(:session, url: sessions_path) do |f| %>
+	<%= f.label 'email or name' %>
+	<%= f.text_field :email %>
+
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+	<br />
+	<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+	<% end %>
+</div>
