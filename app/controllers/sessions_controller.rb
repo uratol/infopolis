@@ -1,12 +1,5 @@
 class SessionsController < ApplicationController
   
-=begin  
-  class Session
-    attr_accessor :name
-  end
-  
-=end
-
   def new
   end
   
