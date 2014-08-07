@@ -1,0 +1,4 @@
+<li <%= 'class=active' if title==yield(:title) %>>
+	<% method ||= :get %>
+	<%= link_to title, url, method: method %>
+</li>

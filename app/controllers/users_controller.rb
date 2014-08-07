@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  
+  
+  
   def new
     @user = User.new
   end
@@ -33,16 +36,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find params[:id]
     
-    params[:user].delete(:password) if params[:user][:password].blank?
+    edit_params = user_params
+    edit_params.except! *[:password, :password_confirmation]  if user_params[:password].blank?
     
-    #user_params.delete(:password) if params[:user][:password].blank?
-    
-    edit_params1 = user_params
-    edit_params1.except! *[:password, :password_confirmation]  if user_params[:password].blank?
-    
-    flash[:debug] = edit_params1
-    
-    if @user.update_attributes(edit_params1)
+    if @user.update_attributes(edit_params)
       flash[:success] = "User #{ user_full_name(@user) } updated" 
       redirect_to users_path
     else
@@ -52,11 +49,11 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
     end
     
     def user_full_name(user)
       "#{ user.name } <#{ user.email }>"
     end
+    
 end

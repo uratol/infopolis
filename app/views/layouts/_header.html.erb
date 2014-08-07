@@ -5,28 +5,32 @@
 			<%= link_to image_tag("logo.png", alt: "Logo"), '/', class:"navbar-brand" %>
 
 			<nav>
-				<ul class="nav pull-right">
-					<li <%= 'class=active' if true %>>
-						<%= link_to "Home",    '/' %>
-					</li>
-					<li>
-						<%= link_to "About",    about_path %>
-					</li>
-					<% if  signed_in? %>
-					<li>
-						<%= link_to "Sign out (#{ current_user.name })", signout_path, method: "delete" %>
-					</li>
-					<% else %>
-					<li>
-						<%= link_to "Sign in", signin_path %>
-					</li>
-					<% end %>
-					<% if signed_admin? %>
-					<li>
-						<%= link_to "Users", users_path %>
-					</li>
-					<% end %>
-				</ul>
+				<div class="dropdown">
+					<ul class="nav pull-right" role="menu" aria-labelledby="dLabel">
+
+						<%= render 'layouts/header_menu_item', title: "Home", url: root_path %>
+
+						<%= render 'layouts/header_menu_item', title: "About", url: about_path %>
+
+						<% if  signed_in? %>
+						<%= render 'layouts/header_menu_item', title: "Sign out (#{ current_user.name })", url: signout_path, method: "delete" %>
+						<% else %>
+						<li class="dropdown-submenu">
+							<a tabindex="-1" href="#">Sign in...</a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+								<%= render 'layouts/header_menu_item', title: "Sign in via login", url: signin_path %>
+								<li class="divider"></li>
+								<%= render 'layouts/header_menu_item', title: "Sign in via Facebook", url: '/auth/facebook' %>
+							</ul>
+						</li>
+						<%#= render 'layouts/header_menu_item', title: "Sign in", url: signin_path %>
+						<% end %>
+
+						<% if signed_admin? %>
+						<%= render 'layouts/header_menu_item', title: "Users", url: users_path %>
+						<% end %>
+					</ul>
+				</div>
 			</nav>
 		</div>
 	</div>

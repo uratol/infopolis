@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   
   def new
+    session[:return_to] = request.referer
   end
   
   def create
@@ -9,7 +10,8 @@ class SessionsController < ApplicationController
     
     if user && user.authenticate(params[:session][:password])
       sign_in(user)
-      redirect_to root_path
+      #redirect_to root_path
+      redirect_to session.delete(:return_to)
     else
       flash.now[:error] = 'Invalid email/password combination'
       #@session.email = params[:session][:email]
