@@ -20,6 +20,13 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
   
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.name = auth.info.name
+      user.email = auth.uid+'@facebook.com'
+      user.save!
+    end
+  end
   private
     def create_remember_token
       self.remember_token = User.encrypt(User.new_remember_token)    

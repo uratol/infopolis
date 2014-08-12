@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       redirect_to users_path
       #redirect_to @user
     else
-      flash[:error] = "User not registered"
+      flash.now[:error] = "User not registered"
       render 'new'
     end
   end

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
 
-  match '/auth/:service/callback', to: 'services#create', via: 'get'
+  match '/auth/:service/callback', to: 'services#create', via: [:get, :post]
+  get 'auth/failure', to: redirect('/'), via: [:get, :post]
   resources :services, only: [:index, :create]
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -7,21 +7,34 @@
 		<%= csrf_meta_tags %>
 	</head>
 	<body>
-		<%= render 'layouts/header'%>
+		<div class="wrapper container">
+			<header>
+				<%= render 'layouts/header'%>
+			</header>
 
-		<div class="container">
-			<%= render 'layouts/flash'%>
+			<%#= render 'layouts/flash'%>
 
-			<%= yield %>
-			
-			<%= render 'layouts/footer' %>
+			<div class="row">
+				<div class="col-md-3">
+					Left pane
+				</div>
+				<div class="col-md-9">
+					<%= yield %>
+				</div>
+			</div>
+
+			<footer>
+				<%= render 'layouts/footer' %>
+			</footer>
 		</div>
 
+		<!--
 		<% if Rails.env.development? %>
 		<div class="container">
-			<%= debug(params) %>
+		<%= debug(params) %>
 		</div>
-		
+
 		<% end %>
+		-->
 	</body>
 </html>
