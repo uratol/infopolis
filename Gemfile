@@ -29,6 +29,10 @@ gem 'bcrypt-ruby'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+gem 'tiny_tds'
+gem 'activerecord-sqlserver-adapter'
+gem 'nokogiri'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -35,6 +35,13 @@ module SessionsHelper
       redirect_to signin_path
     end
   end
+
+  def require_signin
+    unless signed_in?
+      flash[:danger] = "You must be logged in to access this action"
+      redirect_to signin_path
+    end
+  end
   
   def sign_out
     current_user.update_attribute(:remember_token,

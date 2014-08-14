@@ -1,0 +1,39 @@
+<%= provide(:title, "Reports") %>
+<div class="row container">
+	<div class="col-md-3">
+
+		<div class="btn-group">
+			<button class="btn btn-primary">
+				<%= @master.name %>
+			</button>
+			<% if @masters.count > 1 %>
+			<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<% @masters.each do |m| %>
+				<li <%= 'class=active' if m.id==@master.id %>>
+					<%= link_to m.name, "/reports/#{@report.name}/#{m.id}" %>
+				</li>
+				<% end %>
+			</ul>
+			<% end %>
+		</div>
+
+		<br />
+		<br />
+
+		<ul class="nav nav-stacked nav-pills ">
+			<% @reports.each do |r| %>
+			<li <%= 'class=active' if r.name==@report.name %>>
+				<%= link_to r.caption, "/reports/#{r.name}/#{@master.id}" %>
+			</li>
+
+			<% end %>
+		</ul>
+	</div>
+	<div class="col-md-9">
+		<%= @report_html.to_s.html_safe %>
+	</div>
+</div>
+

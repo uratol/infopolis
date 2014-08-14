@@ -23,3 +23,21 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
+
+mssql_default: &mssql_default
+  adapter: sqlserver
+  mode: dblib
+  host: 78.25.23.33
+  port: 6099 
+  username: sa
+  password: PowerW@re
+  timeout: 5000 
+
+mssql_development:
+  <<: *mssql_default
+  database: sg_test
+
+mssql_production:
+  <<: *mssql_default
+  database: sg
+

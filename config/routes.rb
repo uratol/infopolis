@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
 
+  match '/reports', to: 'reports#index', via: 'get'
+  #get '/reports', to: redirect('/reports/sales')
+  match '/reports/:report_name', to: 'reports#index', via: 'get'
+  match '/reports/:report_name/:master', to: 'reports#index', via: 'get'
+
+
   match '/auth/:service/callback', to: 'services#create', via: [:get, :post]
   get 'auth/failure', to: redirect('/'), via: [:get, :post]
   resources :services, only: [:index, :create]
