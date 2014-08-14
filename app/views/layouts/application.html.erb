@@ -12,15 +12,10 @@
 				<%= render 'layouts/header'%>
 			</header>
 
-			<%#= render 'layouts/flash'%>
+			<%= render 'layouts/flash'%>
 
 			<div class="row">
-				<div class="col-md-3">
-					Left pane
-				</div>
-				<div class="col-md-9">
-					<%= yield %>
-				</div>
+				<%= yield %>
 			</div>
 
 			<footer>
@@ -28,13 +23,13 @@
 			</footer>
 		</div>
 
-		<!--
 		<% if Rails.env.development? %>
 		<div class="container">
-		<%= debug(params) %>
+		<%#= debug(params) %>
+		<%#= debug(cookies) %>
+		<%#= debug(session) %>
 		</div>
 
 		<% end %>
-		-->
 	</body>
 </html>

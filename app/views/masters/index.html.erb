@@ -1,0 +1,24 @@
+<%= provide(:title, full_title("Masters")) %>
+<div class="center hero-unit">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th> Name </th>
+				<th> Database </th>
+				<th> Edit </th>
+				<th> Delete </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @masters.each do |m| %>
+			<tr>
+				<td> <%= m.name %> </td>
+				<td> <%= m.database %> </td>
+				<td> <%= link_to "Edit", edit_master_path(m) %> </td>
+				<td> <%= link_to "Delete", master_path(m), method: :delete %> </td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+  <%= link_to "New master", new_master_path, class: "btn btn-large btn-primary" %>
+</div>

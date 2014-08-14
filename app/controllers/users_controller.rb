@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   
+  include SessionsHelper
   
+  before_action :require_admin
   
   def new
     @user = User.new
@@ -17,7 +19,7 @@ class UsersController < ApplicationController
       redirect_to users_path
       #redirect_to @user
     else
-      flash.now[:error] = "User not registered"
+      flash.now[:danger] = "User not registered"
       render 'new'
     end
   end

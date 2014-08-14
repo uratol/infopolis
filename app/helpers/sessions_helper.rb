@@ -9,9 +9,14 @@ module SessionsHelper
     @current_user ||= User.find_by(remember_token: remember_token)
   end
   
-  def sign_in(user)
+  def sign_in(user,remember)
     remember_token = User.new_remember_token
-    cookies.permanent[:remember_token] = remember_token
+    if remember
+      cookies.permanent[:remember_token] = remember_token
+    else
+      cookies[:remember_token] = remember_token
+    end    
+    
     user.update_attribute(:remember_token, User.encrypt(remember_token))
     self.current_user = user
   end
@@ -22,6 +27,13 @@ module SessionsHelper
   
   def signed_admin?
     signed_in? && current_user.admin? 
+  end
+  
+  def require_admin
+    unless signed_admin?
+      flash[:danger] = "You must be logged in as Admin to access this action"
+      redirect_to signin_path
+    end
   end
   
   def sign_out

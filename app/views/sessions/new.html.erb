@@ -1,12 +1,27 @@
 <%= provide(:title, "Sign in") %>
-<div class="center hero-unit">
+<div class="center">
 
 	<%= form_for(:session, url: sessions_path) do |f| %>
-	<%= f.label 'email or name' %>
+	<%= f.label :email, 'Email or name' %>
 	<%= f.text_field :email, value: @email_prev, autofocus: @email_prev.blank? %>
 
+	<br />
 	<%= f.label :password %>
 	<%= f.password_field :password, autofocus: !@email_prev.blank? %>
+	<br />
+
+	<%= f.label :remember, "Remember my" %>
+	
+	
+	<%=
+	if @remember_prev=='0'
+		checked = nil
+	else
+		checked = "checked"
+	end		 
+	f.check_box :remember, checked: checked  
+	%>
+
 	<br />
 	<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
 	<% end %>

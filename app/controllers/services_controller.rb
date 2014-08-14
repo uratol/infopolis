@@ -19,7 +19,7 @@ render :text => omniauth.inspect #omniauth
     if !user 
       user = User.create(name: omniauth['name'], email: email)
       sign_in(user)
-      flash[:error] = "User registered from #{ params[:service] }"
+      flash[:success] = "User registered from #{ params[:service] }"
     end    
     sign_in(user)
     redirect_to session.delete(:return_to)

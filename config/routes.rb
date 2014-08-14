@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy] 
+  resources :masters
   
   match '/about', to: 'static_pages#about', via: 'get'
   

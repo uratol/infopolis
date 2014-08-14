@@ -1,0 +1,16 @@
+<%= form_for(@master) do |f| %>
+
+<%= render 'shared/error_messages', model: @master %>
+
+<%= f.label :name %>
+<%= f.text_field :name, autofocus: true %>
+
+<br />
+
+<%= f.label :database %>
+<%= f.text_field :database %>
+
+<br />
+
+<%= f.submit "Save", class: "btn btn-large btn-primary" %>
+<% end %>

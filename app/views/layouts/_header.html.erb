@@ -1,11 +1,10 @@
 <header class="navbar">
 	<div class="navbar-inner">
 		<div class="container">
-			<%= link_to image_tag("logo.png", alt: "Logo"), '/', class:"navbar-brand" %>
-
 			<nav>
-				<div class="dropdown">
-					<ul class="nav pull-right navbar-nav" role="menu" aria-labelledby="dLabel">
+				<div class="dropdown navbar navbar-default">
+				<%= link_to image_tag("logo.png", alt: "Logo"), '/' %>
+					<ul class="nav pull-right navbar-nav" role="navigation">
 
 						<%= render 'layouts/header_menu_item', title: "Home", url: root_path %>
 
@@ -27,6 +26,7 @@
 
 						<% if signed_admin? %>
 						<%= render 'layouts/header_menu_item', title: "Users", url: users_path %>
+						<%= render 'layouts/header_menu_item', title: "Masters", url: masters_path %>
 						<% end %>
 					</ul>
 				</div>

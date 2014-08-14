@@ -7,4 +7,12 @@ class ApplicationController < ActionController::Base
   
   def home
   end
+
+  def require_admin
+    unless signed_admin?
+      flash[:danger] = "You must be logged in as Admin to access this action"
+      redirect_to signin_path
+    end
+  end
+
 end
