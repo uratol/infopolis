@@ -29,13 +29,13 @@ mssql_default: &mssql_default
   mode: dblib
   host: 78.25.23.33
   port: 6099 
-  username: sa
-  password: PowerW@re
+  username: web
+  password: ppWeb
   timeout: 5000 
 
 mssql_development:
   <<: *mssql_default
-  database: sg_test
+  database: sg
 
 mssql_production:
   <<: *mssql_default

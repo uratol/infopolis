@@ -34,4 +34,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+ 
+ require "response_timer"
+ 
+   config.middleware.use "ResponseTimer", "Load Time"
+  
 end
