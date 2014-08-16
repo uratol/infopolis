@@ -9,6 +9,7 @@
   <xsl:variable name="simple_mask" select="'# ##0,0'"/>
   <xsl:variable name="report" select="DATA/@REPORT"/>
   <xsl:variable name="tov_count" select="count(DATA/PRICES/COLUMNS/TOV)"/>
+  <xsl:variable name="sk_exists" select="SALES/AZS/TOV/CASHFORM/@SK"/>
 
   <xsl:variable name="period" select="string(DATA/@PERIOD)"/>
   <xsl:variable name="IsDrillThrough" select="DATA/@VIEW='drillthrough'"/>
@@ -34,7 +35,7 @@
           <xsl:for-each select="CASHFORMS/CASHFORM">
             <xsl:variable name="cash_colspan">
               <xsl:choose>
-                <xsl:when test="@ID=2">3</xsl:when>
+                <xsl:when test="@ID=2 and $sk_exists">3</xsl:when>
                 <xsl:otherwise>2</xsl:otherwise>
               </xsl:choose>
             </xsl:variable>
@@ -51,7 +52,7 @@
             <xsl:sort select="@ID"/>
 
             <th title="{@ID}">Продано, л</th>
-            <xsl:if test="@ID=2">
+            <xsl:if test="@ID=2 and $sk_exists">
               <th>Округление</th>
             </xsl:if>
             <th>Продано, сумма</th>
@@ -139,7 +140,7 @@
             </xsl:with-param>
           </xsl:call-template>
         </td>
-        <xsl:if test="@ID=2">
+        <xsl:if test="@ID=2 and $sk_exists">
           <td class="money">
             <xsl:call-template name="data_cell">
               <xsl:with-param name="value" select="sum($current_cashform_nodes/@SK)"/>

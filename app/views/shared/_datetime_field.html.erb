@@ -1,0 +1,12 @@
+            <div class="form-group">
+                <div class='input-group date' id='<%= name %>'>
+                    <input type='text' class="form-control" name="<%= name %>" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#<%= name %>').datetimepicker();
+            });
+        </script>

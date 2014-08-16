@@ -2,7 +2,7 @@ class Report < ActiveRecord::Base
   
   establish_connection "mssql_#{Rails.env}"
   
-  attr_accessor :name, :caption
+  attr_accessor :name, :caption, :date_from, :date_to
 
   def self.initialize(name, caption)
     super

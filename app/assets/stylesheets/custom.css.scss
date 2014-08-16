@@ -1,7 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-
+@import 'bootstrap-datetimepicker';
+@import 'daterangepicker-bs3';
 /* footer */
 
 footer {
@@ -39,4 +39,20 @@ footer {
 .field_with_errors {
   @extend .control-group;
   @extend .error;
+}
+
+.table > thead > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td {
+  padding: 0px 2px;
+  vertical-align: middle;
+}
+
+.table > thead > tr > th{
+  text-align: center
+}
+
+.money, .qty{
+  text-align: right
 }
