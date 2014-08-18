@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   match '/reports', to: 'reports#index', via: 'get'
   #get '/reports', to: redirect('/reports/sales')
-  match '/reports/:report_name', to: 'reports#index', via: 'get'
-  match '/reports/:report_name/:master', to: 'reports#index', via: 'get'
+  match '/reports/:report_name', to: 'reports#index', via: [:get, :post]
+  match '/reports/:report_name/:master', to: 'reports#index', via: [:get, :post]
 
 
   match '/auth/:service/callback', to: 'services#create', via: [:get, :post]

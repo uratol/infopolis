@@ -1,0 +1,29 @@
+<fieldset>
+
+	<div class="form-group">
+		<%= f.label :daterange, "Period:", class: "control-label" %>
+		<%= f.text_field :daterange, class: "form-control input-md" %>
+	</div>
+
+	<script type="text/javascript">
+		datarange = $('#report_daterange');
+		datarange.daterangepicker({
+			ranges : {
+				'Today' : [new Date(), new Date()],
+				'Yesterday' : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+				'Last 7 Days' : [moment().subtract(6, 'days'), new Date()],
+				'Last 30 Days' : [moment().subtract(29, 'days'), new Date()],
+				'This Month' : [moment().startOf('month'), moment().endOf('month')],
+				'Last Month' : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+			},
+			opens : 'right',
+			format : 'YYYY-MM-DD',
+			showDropdowns : true
+		});
+
+		datarange.on('apply.daterangepicker', function(ev, picker) {
+			$(this).parents('form:first').submit();
+		});
+	</script>
+
+</fieldset>

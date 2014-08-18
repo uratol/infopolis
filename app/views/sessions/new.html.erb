@@ -1,28 +1,28 @@
 <%= provide(:title, "Sign in") %>
-<div class="center">
+<div class="container">
 
-	<%= form_for(:session, url: sessions_path) do |f| %>
-	<%= f.label :email, 'Email or name' %>
-	<%= f.text_field :email, value: @email_prev, autofocus: @email_prev.blank? %>
+	<%= form_for(:session, url: sessions_path, class: "form-horizontal") do |f| %>
+	<div class="form-group row">
 
-	<br />
-	<%= f.label :password %>
-	<%= f.password_field :password, autofocus: !@email_prev.blank? %>
-	<br />
+		<%= f.label :email, 'Email or name', class: "col-md-2 control-label" %>
+		<%= f.text_field :email, value: @email_prev, autofocus: @email_prev.blank?, class:"col-md-3" %>
 
-	<%= f.label :remember, "Remember me" %>
-	
-	
-	<%=
-	if @remember_prev=='0'
-		checked = nil
-	else
-		checked = "checked"
-	end		 
-	f.check_box :remember, checked: checked  
-	%>
+	</div>
 
-	<br />
-	<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+	<div class="form-group row">
+		<%= f.label :password, class: "col-md-2 control-label" %>
+		<%= f.password_field :password, autofocus: !@email_prev.blank?, class: "col-md-3" %>
+	</div>
+
+	<div class="form-group row">
+		<div class="col-md-5">
+			<%= f.label :remember, "Remember me", class: "control-label" %>
+			<%= f.check_box :remember, checked: case @remember_prev when '0' then nil else	"checked" end %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+	</div>
 	<% end %>
 </div>
