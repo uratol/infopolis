@@ -1,0 +1,23 @@
+<%
+ row_level = if (tov_id && azs_id) then 3 elsif azs_id then 2 else 1 end
+%>
+
+<tr class="data_group<%= 3 - row_level %>">
+	<td> <%= if row then row['tov_nm'] elsif azs_id then @report_masts.detect{|m| m['bmast_id']=azs_id}['bmast_nm'] else 'Итого:' end %> <td class="money"> <%= row['pr0'] if row %> </td>
+	<% (@report_fopls + case when @report_fopls.count>1 then [nil] else [] end).each do |f| %>
+	<td class="qty">
+		1.0
+	</td>
+	<% if f && f['id']=2 %>
+	<td class="money">
+		3.65
+	</td>
+	<% end %>
+	
+	<td class="money">
+		15698.25
+	</td>
+		
+
+	<% end %>
+</tr>

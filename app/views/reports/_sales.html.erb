@@ -1,0 +1,42 @@
+<% measure_count=3
+cashform_count=@report_fopls.count
+%>
+
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th rowspan="3">Наименование</th>
+			<th rowspan="3">Цена</th>
+			<th colspan="<%= cashform_count*(measure_count - 1)+1 %>">Форма оплаты</th>
+			<% if cashform_count>1 %>
+			<th rowspan="2" colspan="<%= measure_count - 1 %>">Итого</th>
+			<% end %>
+		</tr>
+		<tr>
+			<% @report_fopls.each do |f| %>
+			<% cash_colspan = case when f['id']=2 then 3 else 2 end %>
+			<th colspan="<%= cash_colspan %>"> <%= f['fopl_nm'] %> </th>
+			<% end %>
+		</tr>
+		<tr>
+			<% (@report_fopls + case when cashform_count>1 then [nil] else [] end).each do |f| %>
+			<th>Продано, л</th>
+			<% if f && f['id']=2 %>
+			<th>Округление</th>
+			<% end %>
+			<th>Продано, сумма</th>
+			<% end %>
+		</tr>
+		<%= render 'sales_row', tov_id: nil, azs_id: nil, row: nil %>
+	</thead>
+	<tbody>
+		<% @report_masts.each do |m| %>
+		<%= render 'sales_row', tov_id: nil, azs_id: m['bmast_id'], row: nil %>
+
+		<% @report_tovs.each do |t| %>
+		<%= render 'sales_row', tov_id: t['tov_id'], azs_id: m['bmast_id'], row: t %>
+		<% end %>
+
+		<% end %>
+	</tbody>
+</table>

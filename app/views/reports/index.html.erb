@@ -31,9 +31,10 @@
 			<% end %>
 		</ul>
 
-		<%= form_for(@report, url: {} ) do |f| %>
+		<%= form_for(@report, url: {}, html: {method: :GET} ) do |f| %>
 
 		<%= render 'daterange_field', f: f %>
+
 
 		<div class="form-group">
 			<%= f.submit "Apply", class: "btn" %>
@@ -43,7 +44,8 @@
 
 	</div>
 	<div class="col-md-9">
-		<%= (Nokogiri::XSLT File.read("./xslt_templates/report_#{@report.name}.xsl")).transform(Nokogiri::XML @report.xml).to_s.html_safe %>
+		<%= render @report.name.to_s %>
+		<%#= (Nokogiri::XSLT File.read("./xslt_templates/report_#{@report.name}.xsl")).transform(Nokogiri::XML @report.xml).to_s.html_safe %>
 	</div>
 </div>
 

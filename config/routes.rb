@@ -11,8 +11,12 @@ Rails.application.routes.draw do
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
 
-  match '/reports', to: 'reports#index', via: 'get'
+
+
+  resources :sessions, only: [:new, :create, :destroy] 
+
   #get '/reports', to: redirect('/reports/sales')
+  match '/reports', to: 'reports#index', via: 'get'
   match '/reports/:report_name', to: 'reports#index', via: [:get, :post]
   match '/reports/:report_name/:master', to: 'reports#index', via: [:get, :post]
 

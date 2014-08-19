@@ -25,8 +25,13 @@ class ReportsController < ApplicationController
           @report.attributes = reports_params
         end 
         
+        @results = Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", {report_name: report_name, user: current_user.name, dt_from: @report.dt_from, dt_to: @report.dt_to}
+        
+        if respond_to? @report.name # && %w[foo bar].include?(method_name)
+          send @report.name
+        end 
 
-        @report.xml = (Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", {report_name: report_name, user: current_user.name, dt_from: @report.dt_from, dt_to: @report.dt_to} ).first.values.join
+        #@report.xml = (Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", {report_name: report_name, user: current_user.name, dt_from: @report.dt_from, dt_to: @report.dt_to} ).first.values.join
 
       rescue Exception => e
         flash.now[:danger] = e
@@ -37,6 +42,10 @@ class ReportsController < ApplicationController
     else
       redirect_to "/reports/#{@report.name}/#{@master.id}"
     end
+  end
+  
+  def sales
+    @report_masts, @report_fopls, @report_tovs = @results
   end
   
   private
