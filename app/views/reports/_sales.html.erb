@@ -1,42 +1,44 @@
-<% measure_count=3
-cashform_count=@report_fopls.count
-%>
+<% measure_count=3 %>
+
+<% @report_fopls.map{|f| f.merge! sk_exists: @report_data.select{|t| t['fopl_id']==f['fopl_id']}.any?{|t| t['sk'] } } %>
 
 <table class="table table-bordered table-hover">
 	<thead>
 		<tr>
 			<th rowspan="3">Наименование</th>
 			<th rowspan="3">Цена</th>
-			<th colspan="<%= cashform_count*(measure_count - 1)+1 %>">Форма оплаты</th>
-			<% if cashform_count>1 %>
+			<th colspan="<%= @report_fopls.inject(0){|sum, f| sum+(f[:sk_exists] ? measure_count : measure_count-1) } %>">Форма оплаты</th>
+			<% if @report_fopls.count>1 %>
 			<th rowspan="2" colspan="<%= measure_count - 1 %>">Итого</th>
 			<% end %>
 		</tr>
 		<tr>
 			<% @report_fopls.each do |f| %>
-			<% cash_colspan = case when f['id']=2 then 3 else 2 end %>
+			<% cash_colspan = f[:sk_exists] ? measure_count : measure_count-1 %>
 			<th colspan="<%= cash_colspan %>"> <%= f['fopl_nm'] %> </th>
 			<% end %>
 		</tr>
 		<tr>
-			<% (@report_fopls + case when cashform_count>1 then [nil] else [] end).each do |f| %>
+			<% (@report_fopls + (@report_fopls.count>1 ? [nil] : [])).each do |f| %>
 			<th>Продано, л</th>
-			<% if f && f['id']=2 %>
+			<% if f && f[:sk_exists] %>
 			<th>Округление</th>
 			<% end %>
 			<th>Продано, сумма</th>
 			<% end %>
 		</tr>
-		<%= render 'sales_row', tov_id: nil, azs_id: nil, row: nil %>
+		<%= render 'sales_row', row_level: 3, caption: "Total:", values: @report_data, pr0: nil %>
 	</thead>
+
 	<tbody>
 		<% @report_masts.each do |m| %>
-		<%= render 'sales_row', tov_id: nil, azs_id: m['bmast_id'], row: nil %>
+		<%= render 'sales_row', row_level: 2, caption: m['bmast_nm'], values: @report_data.select{|t| t['bmast_id']==m['bmast_id']}, pr0: nil %>
 
-		<% @report_tovs.each do |t| %>
-		<%= render 'sales_row', tov_id: t['tov_id'], azs_id: m['bmast_id'], row: t %>
+		<% @report_data.select{|t| t['bmast_id']==m['bmast_id']}.group_by{|t| [t['tov_nm'],t['pr0']]}.each do |group,values| %>
+		<%= render 'sales_row', row_level: 1, caption: group.first, values: values, pr0: group.second %>
 		<% end %>
 
 		<% end %>
 	</tbody>
+	
 </table>

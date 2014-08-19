@@ -1,0 +1,167 @@
+<% 
+tank_filling = isnil(isnil(values.detect{|v| v['field_nm']=='OIL_REMAINDER2'},{})['val'],0) / isnil(t['volume'],1) * 100
+tank_height=98
+tank_width=62
+tank_border_height=3
+tank_border_width=2
+
+water_height=isnil(isnil(values.detect{|v| v['field_nm']=='OIL_WATER'},{})['val'],0) * (tank_height-2*tank_border_height) / isnil(t['volume'],1)
+fuel_height=isnil(isnil(values.detect{|v| v['field_nm']=='OIL_REMAINDER2'},{})['val'],0) * (tank_height-2*tank_border_height) / isnil(t['volume'],1)
+%>
+
+<div style="float:left;margin-top:30px;margin-left:25px;">
+	<div style="float:left;">
+		<table style="font-size:75%">
+			<tr>
+				<th colspan="4"><a href="#" title="Click to detail"> Tank #
+				<%= t['tank_num']+', '+ t['tov_nm'] %> </a>
+				</th>
+			</tr>
+			<tr>
+				<td rowspan="12" style="vertical-align:middle; padding:5px;">
+				<xsl:variable name="tank_filling" select="(VALUE[@NAME='OIL_REMAINDER2']/@VAL div @VOLUME)*100"/>
+				<div style="text-align:center; font-weight:bold;" title="% заполнения резервуара топливом">
+					<%= format_percent tank_filling %> %
+				</div><a href="#">
+				<div style="position:relative; height:<%=tank_height%>px; width:<%=tank_width%>px;" title="Click to detail">
+					<img src="/assets/tank_empty.png"/>
+					
+					<% if water_height>0 %>
+					<div style="position:absolute; bottom:<%= tank_border_height %>px; left:<%= tank_border_width %>px">
+						<img src="/assets/tank_water.png" style="height:<%= water_height %>px; width:<%= tank_width - tank_border_width*2 %>px;"/>
+					</div>
+					<% end %>
+					
+					<% if fuel_height>0 %>
+					<div style="position:absolute; bottom:<%= tank_border_height+water_height %>px; left:<%= tank_border_width %>px">
+						<img src="/assets/tank_fuel.png" style="height:<%= fuel_height %>px; width:<%= tank_width - tank_border_width*2 %>px; left:<%= tank_border_width %>px"/>
+					</div>
+					<% end %>
+					<!--<div style="position:absolute; bottom:{$tank_border_height+$water_height+$book_height}px; left:{$tank_border_width}px">
+					<img src="tank_book.png" style="width:{$tank_width - $tank_border_width*2}px; left:{$tank_border_width}px"/>
+					</div>-->
+				</div> </a>
+				<div style="text-align:center; font-size:65%" title="Дата и время актуальности показаний">
+					<xsl:call-template name="DateTimeToStr">
+						<xsl:with-param name="datetime" select="@DT"/>
+					</xsl:call-template>
+				</div></td>
+				<td>Объем топлива</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="VALUE[@NAME='OIL_REMAINDER2']/@VAL"/>
+					<xsl:with-param name="format_mask" select="$simple_mask"/>
+				</xsl:call-template></td>
+				<td> л </td>
+			</tr>
+			<tr>
+				<td>Объем топлива учетный</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="@VOLUME_BOOK"/>
+					<xsl:with-param name="format_mask" select="$simple_mask"/>
+				</xsl:call-template></td>
+				<td> л </td>
+			</tr>
+			<tr>
+				<xsl:variable name="volume_diff" select="@VOLUME_BOOK - VALUE[@NAME='OIL_REMAINDER2']/@VAL"/>
+				<td>
+				<xsl:choose>
+					<xsl:when test="$volume_diff > 0">
+						Недостача
+					</xsl:when>
+					<xsl:otherwise>
+						Излишек
+					</xsl:otherwise>
+				</xsl:choose></td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="$volume_diff * (1 - 2*($volume_diff &lt; 0))"/>
+					<xsl:with-param name="format_mask" select="$simple_mask"/>
+				</xsl:call-template></td>
+				<td> л </td>
+			</tr>
+			<tr>
+				<td>Объем резервуара</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="@VOLUME"/>
+					<xsl:with-param name="format_mask" select="$simple_mask"/>
+				</xsl:call-template></td>
+				<td> л </td>
+			</tr>
+			<tr>
+				<td>Высота резервуара</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="@HEIGHT"/>
+					<xsl:with-param name="format_mask" select="$simple_mask"/>
+				</xsl:call-template></td>
+				<td> мм </td>
+			</tr>
+			<tr>
+				<td>Уровень топлива</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="VALUE[@NAME='OIL_AMOUNTMM']/@VAL"/>
+					<xsl:with-param name="format_mask" select="$simple_mask"/>
+				</xsl:call-template></td>
+				<td> мм </td>
+			</tr>
+			<tr>
+				<td>Уровень воды</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="VALUE[@NAME='OIL_WATERMM']/@VAL"/>
+					<xsl:with-param name="format_mask" select="$simple_mask"/>
+				</xsl:call-template></td>
+				<td> мм </td>
+			</tr>
+			<tr>
+				<td>Объем воды</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="VALUE[@NAME='OIL_WATER']/@VAL"/>
+					<xsl:with-param name="format_mask" select="$simple_mask"/>
+				</xsl:call-template></td>
+				<td> л </td>
+			</tr>
+			<tr>
+				<td>Температура</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="VALUE[@NAME='OIL_TEMP2']/@VAL"/>
+					<xsl:with-param name="format_mask" select="$simple_mask"/>
+				</xsl:call-template></td>
+				<td> °С </td>
+			</tr>
+			<tr>
+				<td>Плотность топлива</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="VALUE[@NAME='OIL_DENSITY2']/@VAL"/>
+					<xsl:with-param name="format_mask" select="$qty_mask"/>
+				</xsl:call-template></td>
+				<td style="white-space:nowrap;"> кг/л </td>
+			</tr>
+			<tr>
+				<td>Масса топлива</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="VALUE[@NAME='OIL_DENSITY2']/@VAL * VALUE[@NAME='OIL_REMAINDER2']/@VAL"/>
+					<xsl:with-param name="format_mask" select="$qty_mask"/>
+				</xsl:call-template></td>
+				<td> кг </td>
+			</tr>
+			<tr>
+				<td>Свободный объём</td>
+				<td class="qty">
+				<xsl:call-template name="data_cell">
+					<xsl:with-param name="value" select="@VOLUME - VALUE[@NAME='OIL_REMAINDER2']/@VAL - VALUE[@NAME='OIL_WATER']/@VAL"/>
+					<xsl:with-param name="format_mask" select="$simple_mask"/>
+				</xsl:call-template></td>
+				<td> л </td>
+			</tr>
+		</table>
+	</div>
+</div>

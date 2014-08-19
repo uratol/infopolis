@@ -35,7 +35,6 @@
 
 		<%= render 'daterange_field', f: f %>
 
-
 		<div class="form-group">
 			<%= f.submit "Apply", class: "btn" %>
 		</div>
@@ -44,7 +43,13 @@
 
 	</div>
 	<div class="col-md-9">
+		<% if @report_data && @report_data.any? %>
 		<%= render @report.name.to_s %>
+		<% else %>
+		<div class="alert-success">
+			no data
+		</div>
+		<% end %>
 		<%#= (Nokogiri::XSLT File.read("./xslt_templates/report_#{@report.name}.xsl")).transform(Nokogiri::XML @report.xml).to_s.html_safe %>
 	</div>
 </div>

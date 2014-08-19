@@ -1,0 +1,71 @@
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th rowspan="2">АЗС</th>
+			<th colspan="4">Смена</th>
+			<th rowspan="2">Топливо</th>
+			<th rowspan="2">ТРК</th>
+			<th colspan="2">Показания счётчиков</th>
+			<th rowspan="2">Отпущено по счётчикам</th>
+		</tr>
+		<tr>
+			<th>№</th>
+			<th>Оператор</th>
+			<th>Начало</th>
+			<th>Конец</th>
+			<th>На начало</th>
+			<th>На конец</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @report_data.group_by{|t| t['bmast_id'] }.each do |bmast_id, data| %>
+		<tr class="data_group3">
+			<td colspan="10"><%= data.first['bmast_nm'] %></td>
+		</tr>
+
+		<% data.group_by{|t| t['session_id'] }.each do |session_id, data| %>
+		<tr class="data_group2">
+			<td/>
+			<td> <%= data.first['session_num'] %> </td>
+			<td> <%= data.first['session_nm'] %> </td>
+			<td> <%= data.first['dt1'] %> </td>
+			<td> <%= data.first['dt2'] %> </td>
+			<td colspan="5"/>
+		</tr>
+
+		<% data.group_by{|t| t['tov_id'] }.each do |tov_id, data| %>
+		<tr class="data_group1">
+			<td colspan="5"/>
+			<td colspan="4">
+				<%= data.first['tov_nm'] %>
+			</td>
+			<td align="right" class="qty">
+				<%= format_liters data.inject(0){|sum,x| sum+(x['counter2'] ? x['counter2'] : 0) - (x['counter1'] ? x['counter1'] : 0) } %>
+			</td>
+		</tr>
+		
+		<% data.each do |data| %>
+		<tr class="data_group0">
+			<td colspan="6"/>
+			<td>
+				<%= data['trk_no'] %>
+			</td>
+			<td class="qty">
+				<%= format_liters data['counter1'] %>
+			</td>
+			<td class="qty">
+				<%= format_liters data['counter2'] %>
+			</td>
+			<td class="qty">
+				<%= format_liters data['counter2'] - data['counter1'] %>
+			</td>
+		</tr>
+		<% end %>
+		
+		<% end %>
+
+		<% end %>
+
+		<% end %>
+	</tbody>
+</table>

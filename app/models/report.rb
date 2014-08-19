@@ -25,7 +25,7 @@ class Report < ActiveRecord::Base
 
   def self.all
     unless @reports
-      @reports = Array.new << Report.new(id: 1, name: :sales, caption: "Sales") << Report.new(id: 2, name: :counters, caption: "Counters")  <<  Report.new(id: 3, name: :tank, caption: "Tanks")
+      @reports = Array.new << Report.new(id: 1, name: :sales, caption: "Sales") << Report.new(id: 2, name: :counters, caption: "Counters")  <<  Report.new(id: 3, name: :tanks, caption: "Tanks")
     end  
     @reports
   end

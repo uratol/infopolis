@@ -1,0 +1,14 @@
+<div class="container">
+	<% @report_data.group_by{|t| t['bmast_id'] }.each do |bmast_id, data| %>
+	<div class="row">
+		<div class="col-md-12">
+			<div>
+				<%= data.first['bmast_nm'] %>
+			</div>
+			<% data.each do |t| %>
+				<%= render 'tank', t: t, values: @tank_values.select{|v| v['tank_id']==t['tank_id']} %>
+			<% end %>	
+		</div>
+	</div>
+	<% end %>
+</div>

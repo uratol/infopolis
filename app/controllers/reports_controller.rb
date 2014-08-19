@@ -25,7 +25,7 @@ class ReportsController < ApplicationController
           @report.attributes = reports_params
         end 
         
-        @results = Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", {report_name: report_name, user: current_user.name, dt_from: @report.dt_from, dt_to: @report.dt_to}
+        @report_data = Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", {report_name: report_name, user: current_user.name, dt_from: @report.dt_from, dt_to: @report.dt_to}
         
         if respond_to? @report.name # && %w[foo bar].include?(method_name)
           send @report.name
@@ -37,15 +37,17 @@ class ReportsController < ApplicationController
         flash.now[:danger] = e
       end
 
-    #      @report_html = %+<div class="alert-info">report:#{ @report.name }; master: #{@master.name}</div>+
-
     else
       redirect_to "/reports/#{@report.name}/#{@master.id}"
     end
   end
   
   def sales
-    @report_masts, @report_fopls, @report_tovs = @results
+    @report_masts, @report_fopls, @report_data = @report_data
+  end
+  
+  def tanks
+    @report_data, @tank_values = @report_data
   end
   
   private

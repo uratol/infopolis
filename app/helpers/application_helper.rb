@@ -7,4 +7,8 @@ module ApplicationHelper
       "#{base_title} | #{page_title}"
     end
   end
+  
+  def isnil(v, v_if_nil)
+    defined?(v) ? (v.nil? ? v_if_nil : v) : v_if_nil
+  end
 end
