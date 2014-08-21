@@ -1,0 +1,41 @@
+<% 	mm = defined?(mm) ? mm : nil
+	liters = defined?(liters) ? liters : nil
+	degree = defined?(degree) ? degree : nil
+	kg = defined?(kg) ? kg : nil
+	density = defined?(density) ? density : nil
+%>
+<% if defined? (no_tr) && !no_tr %>
+<tr>
+<% end %>
+	<td><%= caption %></td>
+	<td class="qty"> 
+		<%= if liters 
+			format_liters liters
+			elsif mm  
+			format_number mm
+			elsif degree
+			format_number degree 
+			elsif kg
+			format_number kg 
+			elsif density
+			format_number density 
+			end 
+		%> 
+	<td> <%= 
+			if liters  
+			'л' 
+			elsif mm  
+			'мм'
+			elsif degree  
+			'°С'
+			elsif kg  
+			'кг'
+			elsif density   
+			'кг/л'
+			end 
+		%> 
+	</td>
+	
+<% if defined? (no_tr) && !no_tr %>
+</tr>
+<% end %>
