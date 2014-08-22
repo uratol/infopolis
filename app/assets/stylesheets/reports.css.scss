@@ -1,3 +1,41 @@
 // Place all the styles related to the reports controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.money, .qty{
+  text-align: right;
+  white-space: nowrap;
+}
+
+
+.unit{
+  color: gray;
+  font-size: 85%;
+  vertical-align: bottom;
+}
+
+.tank_measure{
+  background-color: #f0f0f0
+}
+
+.table > thead {
+  background-color: #a0a0a0;
+  color: #fff;
+}
+
+.data_group0{
+  background-color: #fff
+}
+
+.data_group1{
+  background-color: #f0f0f0
+}
+
+.data_group2{
+  background-color: #c0c0c0
+}
+
+.data_group3{
+  background-color: #a0a0a0
+}

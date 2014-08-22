@@ -2,18 +2,18 @@
 
  #tank_filling = isnil(isnil(values.detect{|v| v['field_nm']=='OIL_REMAINDER2'},{})['val'],0) / isnil(t['volume'],1) * 100
 
-  tank_volume = isnil(t['volume'],0)
-  fuel_volume = array_hash_key_value(values,:field_nm,:OIL_REMAINDER2,:val)
-  tank_filling = tank_volume.nil? || tank_volume==0 ? nil : fuel_volume / tank_volume * 100
-  fuel_density = array_hash_key_value(values,:field_nm,:OIL_DENSITY2,:val)
-  water_volume = array_hash_key_value(values,:field_nm,:OIL_WATER,:val) 
+  tank_volume = t['volume'] || 0
+  fuel_volume = (values.hash_key_value :field_nm,:OIL_REMAINDER2,:val) || 0
+  tank_filling = tank_volume==0 ? nil : fuel_volume / tank_volume * 100
+  fuel_density = (values.hash_key_value :field_nm,:OIL_DENSITY2,:val) || 0
+  water_volume = (values.hash_key_value :field_nm,:OIL_WATER,:val)  || 0
 
   tank_height=98
   tank_width=62
   tank_border_height=3
   tank_border_width=2
 
-  water_height=isnil(array_hash_key_value(values,:field_nm,:OIL_WATER,:val) * (tank_height-2*tank_border_height) / tank_volume, 0)
+  water_height=(values.hash_key_value(:field_nm,:OIL_WATER,:val)||0) * (tank_height-2*tank_border_height) / tank_volume || 0
 
   fuel_height=isnil(fuel_volume * (tank_height-2*tank_border_height) / tank_volume,0)
 
@@ -24,7 +24,7 @@
 
 <div style="float:left;margin-left:25px;">
 	<div style="float:left;">
-		<table style="font-size:85%">
+		<table class="table" style="font-size:85%">
 			<tr>
 				<th colspan="4"><a href="#" title="Click to detail"> Tank #
 				<%= t['tank_num']+', '+ t['tov_nm'] %> </a></th>
@@ -62,10 +62,10 @@
 			<%= render 'tank_row', caption: volume_diff > 0 ? "Недостача" : "Излишек", liters: volume_diff.abs %>
 			<%= render 'tank_row', caption: "Объем резервуара", liters: t['volume'] %>
 			<%= render 'tank_row', caption: "Высота резервуара", mm: t['height'] %>
-			<%= render 'tank_row', caption: "Уровень топлива", mm: array_hash_key_value(values,:field_nm,:OIL_AMOUNTMM,:val,nil) %>
-			<%= render 'tank_row', caption: "Уровень воды", mm: array_hash_key_value(values,:field_nm,:OIL_WATERMM,:val,nil) %>
+			<%= render 'tank_row', caption: "Уровень топлива", mm: values.hash_key_value(:field_nm,:OIL_AMOUNTMM,:val) %>
+			<%= render 'tank_row', caption: "Уровень воды", mm: values.hash_key_value(:field_nm,:OIL_WATERMM,:val) %>
 			<%= render 'tank_row', caption: "Объем воды", liters: water_volume %>
-			<%= render 'tank_row', caption: "Температура", degree: array_hash_key_value(values,:field_nm,:OIL_TEMP2,:val,nil) %>
+			<%= render 'tank_row', caption: "Температура", degree: values.hash_key_value(:field_nm,:OIL_TEMP2,:val) %>
 			<%= render 'tank_row', caption: "Плотность топлива", density: fuel_density %>
 			<%= render 'tank_row', caption: "Масса топлива", kg: fuel_density*fuel_volume if fuel_density && fuel_volume %>
 			<%= render 'tank_row', caption: "Свободный объём", liters: tank_volume-fuel_volume-water_volume %>

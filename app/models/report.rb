@@ -2,15 +2,16 @@ class Report < ActiveRecord::Base
   
   establish_connection "mssql_#{Rails.env}"
   
-  attr_accessor :id, :name, :caption, :daterange, :xml
+  attr_accessor :id, :name, :caption, :daterange, :filters
 
   before_create :set_defaults
 
-  def self.initialize(id, name, caption)
+  def self.initialize(id, name, caption, filters = [])
     super
     @id = id
     @name = name
     @caption = caption
+    @filters = filters || []
   end
   
 
@@ -25,7 +26,10 @@ class Report < ActiveRecord::Base
 
   def self.all
     unless @reports
-      @reports = Array.new << Report.new(id: 1, name: :sales, caption: "Sales") << Report.new(id: 2, name: :counters, caption: "Counters")  <<  Report.new(id: 3, name: :tanks, caption: "Tanks")
+      @reports = Array.new 
+      @reports << Report.new(id: 1, name: :sales, caption: "Sales", filters: [:daterange]) 
+      @reports << Report.new(id: 2, name: :counters, caption: "Counters", filters: [:daterange])  
+      @reports <<  Report.new(id: 3, name: :tanks, caption: "Tanks", filters: [])
     end  
     @reports
   end

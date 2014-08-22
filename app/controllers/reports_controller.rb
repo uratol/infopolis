@@ -27,9 +27,7 @@ class ReportsController < ApplicationController
         
         @report_data = Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", {report_name: report_name, user: current_user.name, dt_from: @report.dt_from, dt_to: @report.dt_to}
         
-        if respond_to? @report.name # && %w[foo bar].include?(method_name)
-          send @report.name
-        end 
+        send @report.name if respond_to? @report.name
 
         #@report.xml = (Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", {report_name: report_name, user: current_user.name, dt_from: @report.dt_from, dt_to: @report.dt_to} ).first.values.join
 

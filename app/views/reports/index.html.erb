@@ -31,13 +31,19 @@
 			<% end %>
 		</ul>
 
+
+		<% if @report.filters.any? %>
+
 		<%= form_for(@report, url: {}, html: {method: :GET} ) do |f| %>
 
+		<% if @report.filters.include? :daterange %>
 		<%= render 'daterange_field', f: f %>
-
+		<% end %>
+		
 		<div class="form-group">
 			<%= f.submit "Apply", class: "btn" %>
 		</div>
+		<% end %>
 
 		<% end %>
 

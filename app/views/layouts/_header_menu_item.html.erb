@@ -1,4 +1,4 @@
-<li <%= 'class=active' if title==yield(:title) %>>
+<%= content_tag :li, ({class: 'active'} if title==yield(:title)) do %>
 	<% method ||= :get %>
 	<%= link_to title, url, method: method %>
-</li>
+<% end %>

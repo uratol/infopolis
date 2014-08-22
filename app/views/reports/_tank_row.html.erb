@@ -8,7 +8,7 @@
 <tr>
 <% end %>
 	<td><%= caption %></td>
-	<td class="qty"> 
+	<td class="qty tank_measure"> 
 		<%= if liters 
 			format_liters liters
 			elsif mm  
@@ -21,7 +21,7 @@
 			format_number density 
 			end 
 		%> 
-	<td> <%= 
+	<td class="unit"> <%= 
 			if liters  
 			'л' 
 			elsif mm  
