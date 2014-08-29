@@ -2,7 +2,7 @@
 
 <% @report_fopls.map{|f| f.merge! sk_exists: @report_data.select{|t| t['fopl_id']==f['fopl_id']}.any?{|t| t['sk'] } } %>
 
-<table class="table table-bordered table-hover">
+<table class="table report-table">
 	<thead>
 		<tr>
 			<th rowspan="3">Наименование</th>

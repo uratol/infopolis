@@ -13,7 +13,6 @@ class ReportsController < ApplicationController
     @master = @masters.find_by_id(master_id) || @masters.first
     @report = Report.find_by_name(report_name) || @reports.first
     
-    
     if report_name && master_id
       begin
         

@@ -52,12 +52,5 @@ gem 'russian'
 # gem 'debugger', group: [:development, :test]
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-group [:development, :test] do
-  gem 'sqlite3'
-  gem 'tzinfo-data', platforms: [:mingw, :mswin]
-end
-
-group :production do
-  gem 'pg'
-  gem 'rails_12factor'
-end
+gem 'sqlite3'
+gem 'tzinfo-data', platforms: [:mingw, :mswin]
