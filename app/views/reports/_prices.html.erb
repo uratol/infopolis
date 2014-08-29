@@ -1,0 +1,53 @@
+<%= @report_masts %>
+<br/>
+<br/>
+<%= @report_tovs %>
+<br/>
+<br/>
+<%= @report_data %>
+<br/>
+<br/>
+
+<table class="table report-table">
+	<thead>
+		<tr>
+			<th rowspan="2">АЗС</th>
+			<th rowspan="2">Управление ценами</th>
+			<th colspan="<%= @report_tovs.count %>"> Цены </th>
+		</tr>
+		<tr>
+			<% @report_tovs.each do |t| %>
+			<th> <%= t['tov_nm'] %> </th>
+			<% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<% @report_masts.each do |b| %>
+		<% prices_export_disable = b['properties'] && (b['properties'].include? 'OIL_PRICES_EXPORT_DISABLE') %>
+
+		<tr id="<%= b['bmast_id'] %>">
+			<td> <%= b['bmast_nm'] %> </td>
+			<td style="padding:0">
+			<select name="PrCombo" id="{@ID}" onchange="ControlChange()" style="border: 0 none;">
+				<option value="1" <%= ' selected="selected"' if prices_export_disable %>> Setting price on PFS </option>
+				<option value="0" <%= ' selected="selected"' unless prices_export_disable %>> Setting price on office </option>
+			</select></td>
+		</tr>
+		<tr>
+			<% @report_tovs.each do |t| %>
+			<td> <%= @report_data. %> </td>
+			<% end %>
+		</tr>
+
+		<% end %>
+
+		<tr>
+			<td colspan="{$tov_count+2}" align="right">
+			<input type="hidden" id="submitData" name="data"/>
+			<input id="btReset" type="reset" value="Отмена" style="margin-right:15px; padding:0px 5px" disabled="disabled" onclick="formReset();">
+			</input>
+			<input id="btSubmit" type="submit" onclick="saveData()" value="Сохранить" style="padding:0px 5px" disabled="disabled">
+			</input></td>
+		</tr>
+	</tbody>
+</table>

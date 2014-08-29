@@ -24,7 +24,12 @@ class ReportsController < ApplicationController
           @report.attributes = reports_params
         end 
         
-        @report_data = Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", {report_name: report_name, user: current_user.name, dt_from: @report.dt_from, dt_to: @report.dt_to}
+        procedure_params = {report_name: report_name, user: current_user.name}
+        if @report.filters.include?(:daterange)
+          procedure_params.merge! dt_from: @report.dt_from, dt_to: @report.dt_to
+        end
+        
+        @report_data = Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", procedure_params 
         
         send @report.name if respond_to? @report.name
 
@@ -45,6 +50,10 @@ class ReportsController < ApplicationController
   
   def tanks
     @report_data, @tank_values = @report_data
+  end
+
+  def prices
+    @report_masts, @report_tovs, @report_data = @report_data
   end
   
   private
