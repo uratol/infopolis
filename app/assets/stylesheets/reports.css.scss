@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$disabledTextColor: #a0a0a0;
+
 .report-table {
   font-size:85%
 }
@@ -41,4 +43,23 @@
 
 .data_group3{
   background-color: #a0a0a0
+}
+
+.number-grid-input{
+  border: 0 none; 
+  text-align:right;
+}
+
+.number-grid-input[readonly]{
+  color: $disabledTextColor
+}
+
+input[type=reset][disabled]{
+  color: $disabledTextColor
+}
+input[type=submit][disabled]{
+  color: $disabledTextColor
+}
+input[type=button][disabled]{
+  color: $disabledTextColor
 }

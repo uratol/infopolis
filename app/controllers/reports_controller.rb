@@ -4,44 +4,44 @@ class ReportsController < ApplicationController
   before_action :require_signin
   
   def index
-    @reports = Report.all
+
     @masters = Master.all
+    @master = @masters.find_by_id(params[:master]) || @masters.first
 
-    report_name = params[:report_name]
-    master_id = params[:master]
-
-    @master = @masters.find_by_id(master_id) || @masters.first
-    @report = Report.find_by_name(report_name) || @reports.first
+    @reports = Report.all
     
-    if report_name && master_id
-      begin
-        
-        Time::DATE_FORMATS[:input_date] = "%Y-%m-%d"
-        today_str = Time.current.to_s :input_date
-        @report.daterange = "#{today_str} : #{today_str}" unless @report.daterange
+    
+    @report = @reports.find{|r| r.name.to_s==params[:report_name]} || @reports.first
+    
+    begin
+      
+      Time::DATE_FORMATS[:input_date] = "%Y-%m-%d"
+      today_str = Time.current.to_s :input_date
+      @report.daterange = "#{today_str} : #{today_str}" unless @report.daterange
 
-        if reports_params
-          @report.attributes = reports_params
-        end 
-        
-        procedure_params = {report_name: report_name, user: current_user.name}
-        if @report.filters.include?(:daterange)
-          procedure_params.merge! dt_from: @report.dt_from, dt_to: @report.dt_to
-        end
-        
-        @report_data = Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", procedure_params 
-        
-        send @report.name if respond_to? @report.name
-
-        #@report.xml = (Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{report_name.upcase}", {report_name: report_name, user: current_user.name, dt_from: @report.dt_from, dt_to: @report.dt_to} ).first.values.join
-
-      rescue Exception => e
-        flash.now[:danger] = e
+      if reports_params
+        @report.attributes = reports_params
+      end 
+      
+      procedure_params = {report_name: @report.name, user: current_user.name}
+      if @report.filters.include?(:daterange)
+        procedure_params.merge! dt_from: @report.dt_from, dt_to: @report.dt_to
       end
+      
+      if params[:data]
+        procedure_params.merge! data: params[:data]
+      end
+      
+      @report_data = Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{@report.name.upcase}", procedure_params 
+      
+      send @report.name if respond_to? @report.name
 
-    else
-      redirect_to "/reports/#{@report.name}/#{@master.id}"
+      #@report.xml = (Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{@report.name.upcase}", {@report.name: @report.name, user: current_user.name, dt_from: @report.dt_from, dt_to: @report.dt_to} ).first.values.join
+
+    rescue Exception => e
+      flash.now[:danger] = e
     end
+
   end
   
   def sales

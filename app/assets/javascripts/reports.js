@@ -1,96 +1,93 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+function createXmlDocument() {
+	var ret;
+	if (document.implementation && document.implementation.createDocument) {
+		ret = document.implementation.createDocument('', '', null);
+	} else {
+		ret = new ActiveXObject('MSXML2.DomDocument');
+	};
+	return ret;
+};
 
-      function createXmlDocument(){
-      var ret;
-      if (document.implementation &amp;&amp; document.implementation.createDocument) {
-      ret = document.implementation.createDocument('', '', null);
-      }
-      else {
-      ret = new ActiveXObject('MSXML2.DomDocument');
-      };
-      return ret;
-      };
+function getXmlDocumentString(xmlDoc) {
+	if (document.implementation && document.implementation.createDocument) {
+		return (new XMLSerializer().serializeToString(xmlDoc));
+	} else {
+		return xmlDoc.xml;
+	}
+}
 
-      function getXmlDocumentString(xmlDoc){
-      if (document.implementation &amp;&amp; document.implementation.createDocument) {
-      return (new XMLSerializer().serializeToString(xmlDoc));
-      }
-      else {
-      return xmlDoc.xml;
-      }
-      }
+function SetNodeText(node, value) {
 
-      function SetNodeText(node, value){
+	node.appendChild(node.ownerDocument.createTextNode(value));
+}
 
-      node.appendChild(node.ownerDocument.createTextNode(value));
-      }
+function saveData() {
 
-      function saveData(){
+	var xmlDoc = createXmlDocument();
 
+	rootNode = xmlDoc.createElement('root');
+	xmlDoc.appendChild(rootNode);
 
-      var xmlDoc = createXmlDocument();
+	//xmlDoc = xmlDoc.createElement ("root");
+	// document.createElement('root');
 
-      rootNode = xmlDoc.createElement('root');
-      xmlDoc.appendChild(rootNode);
+	var combos = document.getElementsByName('PrCombo');
 
-      //xmlDoc = xmlDoc.createElement ("root");
-      // document.createElement('root');
+	for (var i = 0; i < combos.length; i++) {
+		if (!combos[i].options[combos[i].selectedIndex].defaultSelected) {
+			var AzsNode = xmlDoc.createElement('azs');
 
-      var combos = document.getElementsByName('PrCombo');
+			AzsNode.setAttribute('id', combos[i].id);
 
-      for (var i = 0; i&lt;combos.length;i++){
-      if (!combos[i].options[combos[i].selectedIndex].defaultSelected){
-      var AzsNode = xmlDoc.createElement('azs');
+			AzsProperties = '';
+			if (combos[i].value == 1)
+				AzsProperties = 'OIL_PRICES_EXPORT_DISABLE';
 
-      AzsNode.setAttribute('id',combos[i].id);
+			if (AzsProperties != '')
+				AzsNode.setAttribute('properties', AzsProperties);
 
-      AzsProperties = '';
-      if (combos[i].value==1) AzsProperties = 'OIL_PRICES_EXPORT_DISABLE';
+			rootNode.appendChild(AzsNode);
+		}
+	}
 
-      if (AzsProperties!='')
-      AzsNode.setAttribute('properties',AzsProperties);
+	var prices = document.getElementsByName('PrPrice');
+	for (var i = 0; i < prices.length; i++) {
+		if (prices[i].value != prices[i].defaultValue) {
+			var PriceNode = xmlDoc.createElement('price');
+			PriceNode.setAttribute('azs_id', prices[i].parentNode.parentNode.id);
+			PriceNode.setAttribute('tov_id', prices[i].id);
 
-      rootNode.appendChild(AzsNode);
-      }
-      }
+			SetNodeText(PriceNode, prices[i].value);
+			rootNode.appendChild(PriceNode);
+		}
+	}
 
-      var prices = document.getElementsByName('PrPrice');
-      for (var i = 0; i&lt;prices.length; i++){
-      if (prices[i].value!=prices[i].defaultValue){
-      var PriceNode = xmlDoc.createElement('price');
-      PriceNode.setAttribute('azs_id',prices[i].parentNode.parentNode.id);
-      PriceNode.setAttribute('tov_id',prices[i].id);
+	document.getElementById('submitData').value = getXmlDocumentString(xmlDoc);
+}
 
-      SetNodeText(PriceNode,prices[i].value);
-      rootNode.appendChild(PriceNode);
-      }
-      }
+function ControlChange() {
+	
+	$('#btReset').prop('disabled', false);
+	$('#btSubmit').prop('disabled', false);
+	
+};
 
-      document.getElementById('submitData').value = getXmlDocumentString(xmlDoc);
-      }
+function formReset(bt) {
+	$(bt).parents('form:first')[0].reset();
+	
+	$('#btReset').prop('disabled', true);
+	$('#btSubmit').prop('disabled', true);
+}
 
-      function ControlChange(){
-      document.getElementById('btReset').disabled = '';
-      document.getElementById('btSubmit').disabled = '';
-      };
-
-      function formReset()
-      {
-      document.forms['form'].reset();
-      document.getElementById('btReset').disabled = 'disabled';
-      document.getElementById('btSubmit').disabled = 'disabled';
-      }
-
-      function numberValidate(evt) {
-      var theEvent = evt || window.event;
-      var key = theEvent.keyCode || theEvent.which;
-      key = String.fromCharCode( key );
-      var regex = /[0-9]|[\.,]/;
-      if( !regex.test(key) ) {
-      theEvent.returnValue = false;
-      if(theEvent.preventDefault) theEvent.preventDefault();
-      }
-      else ControlChange();
-      }
+function numberValidate(evt) {
+	var theEvent = evt || window.event;
+	var key = theEvent.keyCode || theEvent.which;
+	key = String.fromCharCode(key);
+	var regex = /[0-9]|[\.,]/;
+	if (!regex.test(key)) {
+		theEvent.returnValue = false;
+		if (theEvent.preventDefault)
+			theEvent.preventDefault();
+	} else
+		ControlChange();
+}
