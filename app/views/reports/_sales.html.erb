@@ -1,3 +1,5 @@
+<%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %> 
+
 <% measure_count=3 %>
 
 <% @report_fopls.map{|f| f.merge! sk_exists: @report_data.select{|t| t['fopl_id']==f['fopl_id']}.any?{|t| t['sk'] } } %>
@@ -42,3 +44,14 @@
 	</tbody>
 	
 </table>
+
+<% chart_data = @report_data.group_by{|d| d['tov_nm']} %>
+<% chart_data = chart_data.map{|k,v| [k, v.hash_sum('qty') ]}   %>
+
+<%= pie_chart chart_data, library: {title: 'by product, liters'} %>
+
+<% chart_data = {'PFS' => nil}.merge (@report_data.group_by{|d| d['tov_nm'] }) %>
+
+<% chart_data = chart_data.map{|k,v| [k, v.nil? ? 'pfs' : v.hash_sum('qty') ]}   %>
+
+<%= column_chart chart_data, library: {title: 'by PFS and product, liters'} %>
