@@ -1,46 +1,73 @@
-<%= form_for('current_page') do |f| %>
+<%= form_for 'current_page', data:{}, html: {onSubmit: 'pricesSubmit(this)', onReset: 'pricesReset(this);'} do |f| %>
 
-	<table class="table report-table">
-		<thead>
-			<tr>
-				<th rowspan="2">АЗС</th>
-				<th rowspan="2">Управление ценами</th>
-				<th colspan="<%= @report_tovs.count %>"> Цены </th>
-			</tr>
-			<tr>
-				<% @report_tovs.each do |t| %>
-				<th> <%= t['tov_nm'] %> </th>
+<%#= params[:prices][0].to_xml(:root => 'row') if  params[:prices] %>
+
+<div class="row">
+	<div class="col-md-12">
+
+		<table class="table report-table">
+			<thead>
+				<tr>
+					<th rowspan="2">PFS</th>
+					<th colspan="2">Prices control</th>
+					<th colspan="<%= @report_tovs.count %>"> Prices </th>
+				</tr>
+				<tr>
+					<th>from PFS</th>
+					<th>from office</th>
+					<% @report_tovs.each do |t| %>
+					<th> <%= t['tov_nm'] %> </th>
+					<% end %>
+				</tr>
+			</thead>
+			<tbody>
+				<% @report_masts.each do |b| %>
+				<% prices_export_disable = b['properties'] && (b['properties'].include? 'OIL_PRICES_EXPORT_DISABLE') %>
+
+				<tr id="<%= b['bmast_id'] %>">
+					<td> <%= b['bmast_nm'] %> </td>
+					<td class="table-radio">
+						<% if b['is_pfs'] %>
+						<%= f.radio_button b['bmast_id'], :from_pfs, checked: prices_export_disable, id: nil, name: b['bmast_id'], onchange: "pricesControlChange()" %>
+						<% end %> 
+					</td>
+					<td class="table-radio">
+						<%= f.radio_button b['bmast_id'], :from_office, checked: !prices_export_disable, id: nil, name: b['bmast_id'], onchange: "pricesControlChange()" %> 
+					</td>
+
+
+<% if false %>
+					<td style="padding:0">
+					<select name="PrCombo" id="<%= b['bmast_id'] %>" onchange="pricesControlChange()" style="border: 0 none;">
+						<option value="1" <%= ' selected="selected"' if prices_export_disable %>> from PFS </option>
+						<option value="0" <%= ' selected="selected"' unless prices_export_disable %>> from office </option>
+					</select>
+					</td>
+<% end %>					
+					
+					
+					<% @report_tovs.each do |t| %>
+					
+					
+					<td class="money"> <% p = @report_data.find{|p| p['tov_id']==t['tov_id'] && p['bmast_id']==b['bmast_id']} %>
+						
+					<%= text_field_tag 'pr', (format_money(p['price']) if p), id: t['tov_id'], name: nil, readonly: (prices_export_disable ? 'readonly' : nil), class: "number-grid-input", onkeypress: "if (!this.readOnly) numberValidate(event);", onchange: "pricesControlChange()" %> </td>
+					<% end %>
+				</tr>
+
 				<% end %>
-			</tr>
-		</thead>
-		<tbody>
-			<% @report_masts.each do |b| %>
-			<% prices_export_disable = b['properties'] && (b['properties'].include? 'OIL_PRICES_EXPORT_DISABLE') %>
 
-			<tr id="<%= b['bmast_id'] %>">
-				<td> <%= b['bmast_nm'] %> </td>
-				<td style="padding:0">
-				<select name="PrCombo" id="<%= b['bmast_id'] %>" onchange="ControlChange()" style="border: 0 none;">
-					<option value="1" <%= ' selected="selected"' if prices_export_disable %>> from PFS </option>
-					<option value="0" <%= ' selected="selected"' unless prices_export_disable %>> from office </option>
-				</select></td>
-				<% @report_tovs.each do |t| %>
-				<td class="money"> <% p = @report_data.find{|p| p['tov_id']==t['tov_id'] && p['bmast_id']==b['bmast_id']} %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-9"></div>
+	<div class="col-md-3">
+		<%= f.hidden_field :submitData, id: 'submitData', name:'data'  %>
+		<%= f.submit "Cancel", :type => "reset", disabled: 'disabled' %>
+		<%= f.submit "Save", disabled: 'disabled' %>
+	</div>
+</div>
 
-				<%= text_field_tag 'PrPrice', (format_money(p['price']) if p), id: t['tov_id'], readonly: (prices_export_disable ? 'readonly' : nil), class: "number-grid-input", onkeypress: "if (!this.readOnly) numberValidate(event);", onchange: "ControlChange()" %> </td>
-				<% end %>
-			</tr>
-
-			<% end %>
-
-			<tr>
-				<td colspan="<%= @report_tovs.count+2%>" align="right">
-				<input type="hidden" id="submitData" name="data"/>
-				<input id="btReset" type="reset" value="Отмена" style="margin-right:15px; padding:0px 5px" disabled="disabled" onclick="formReset(this);">
-				</input>
-				<input id="btSubmit" type="submit" onclick="saveData()" value="Сохранить" style="padding:0px 5px" disabled="disabled">
-				</input></td>
-			</tr>
-		</tbody>
-	</table>
 <% end %>

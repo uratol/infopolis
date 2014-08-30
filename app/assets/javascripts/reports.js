@@ -21,7 +21,7 @@ function SetNodeText(node, value) {
 	node.appendChild(node.ownerDocument.createTextNode(value));
 }
 
-function saveData() {
+function pricesSubmit(form) {
 
 	var xmlDoc = createXmlDocument();
 
@@ -31,26 +31,26 @@ function saveData() {
 	//xmlDoc = xmlDoc.createElement ("root");
 	// document.createElement('root');
 
-	var combos = document.getElementsByName('PrCombo');
-
-	for (var i = 0; i < combos.length; i++) {
-		if (!combos[i].options[combos[i].selectedIndex].defaultSelected) {
+	radios = $(form).find(':radio:checked');
+	for (var i = 0; i < radios.length; i++) {
+		if (radios[i].checked != radios[i].defaultChecked) {
 			var AzsNode = xmlDoc.createElement('azs');
 
-			AzsNode.setAttribute('id', combos[i].id);
+			AzsNode.setAttribute('id', radios[i].name);
 
 			AzsProperties = '';
-			if (combos[i].value == 1)
+			if (radios[i].value == 'from_pfs')
 				AzsProperties = 'OIL_PRICES_EXPORT_DISABLE';
 
 			if (AzsProperties != '')
 				AzsNode.setAttribute('properties', AzsProperties);
 
 			rootNode.appendChild(AzsNode);
+
 		}
 	}
 
-	var prices = document.getElementsByName('PrPrice');
+	var prices = $(form).find('.number-grid-input');
 	for (var i = 0; i < prices.length; i++) {
 		if (prices[i].value != prices[i].defaultValue) {
 			var PriceNode = xmlDoc.createElement('price');
@@ -62,21 +62,19 @@ function saveData() {
 		}
 	}
 
-	document.getElementById('submitData').value = getXmlDocumentString(xmlDoc);
+	$(form).find('#submitData')[0].value = getXmlDocumentString(xmlDoc);
+	
+	$(form).find(':radio').prop('disabled', true);
 }
 
-function ControlChange() {
-	
-	$('#btReset').prop('disabled', false);
-	$('#btSubmit').prop('disabled', false);
-	
+function pricesControlChange() {
+	$('input[type=submit]').add('input[type=reset]').prop('disabled', false);
 };
 
-function formReset(bt) {
-	$(bt).parents('form:first')[0].reset();
-	
-	$('#btReset').prop('disabled', true);
-	$('#btSubmit').prop('disabled', true);
+function pricesReset(form) {
+	form.reset();
+
+	$('input[type=submit]').add('input[type=reset]').prop('disabled', true);
 }
 
 function numberValidate(evt) {
@@ -89,5 +87,5 @@ function numberValidate(evt) {
 		if (theEvent.preventDefault)
 			theEvent.preventDefault();
 	} else
-		ControlChange();
+		pricesControlChange();
 }
