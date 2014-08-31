@@ -46,6 +46,9 @@ class ReportsController < ApplicationController
   
   def sales
     @report_masts, @report_fopls, @report_data = @report_data
+    def @report_masts.bmast_nm (bmast_id)
+      find{|m| m['bmast_id']==bmast_id}['bmast_nm']
+    end  
   end
   
   def tanks
@@ -55,6 +58,7 @@ class ReportsController < ApplicationController
   def prices
     @report_masts, @report_tovs, @report_data = @report_data
   end
+  
   
   private
     def reports_params

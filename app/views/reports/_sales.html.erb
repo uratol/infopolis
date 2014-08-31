@@ -1,4 +1,4 @@
-<%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %> 
+<%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
 
 <% measure_count=3 %>
 
@@ -42,16 +42,24 @@
 
 		<% end %>
 	</tbody>
-	
+
 </table>
 
-<% chart_data = @report_data.group_by{|d| d['tov_nm']} %>
-<% chart_data = chart_data.map{|k,v| [k, v.hash_sum('qty') ]}   %>
+<%=
+tov_groupped_data = @report_data.group_by{|d| d['tov_nm']}
 
-<%= pie_chart chart_data, library: {title: 'by product, liters'} %>
+chart_data = tov_groupped_data.map{|k,v| [k, v.hash_sum('qty') ]}
+pie_chart chart_data, library: {title: 'by products, liters', backgroundColor: 'transparent', is3D: true, pieSliceText: 'value'}
+%>
+<%=
 
-<% chart_data = {'PFS' => nil}.merge (@report_data.group_by{|d| d['tov_nm'] }) %>
+chart_data = tov_groupped_data.map do |t,d|
+{name: t, data: d.group_by{|r| r['bmast_id']}.map{|g,r| [@report_masts.bmast_nm(g), r.hash_sum('qty')]}  }
+end
 
-<% chart_data = chart_data.map{|k,v| [k, v.nil? ? 'pfs' : v.hash_sum('qty') ]}   %>
 
-<%= column_chart chart_data, library: {title: 'by PFS and product, liters'} %>
+column_chart chart_data, library: {title: 'by PFS and products, liters', vAxis: {title: 'liters'}}, stacked: true
+
+%>
+
+<%# chart_data = [{ name: 'Товар1', data: [[:АЗС1,20], [:АЗС2,30] ]}	,{ name: 'Товар2', data: [[:АЗС1,25], [:АЗС2,56] ]}		]	%>
