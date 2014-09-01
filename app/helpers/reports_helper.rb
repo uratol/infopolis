@@ -10,8 +10,16 @@ module ReportsHelper
     number_to_currency(m, unit: '', delimiter: ' ', precision: 1)
   end
 
+  def format_date(d)
+    d.strftime('%d.%m.%Y') if d
+  end
+
+  def format_time(d)
+    d.strftime('%H:%M') if d
+  end
+
   def format_datetime(d)
-    d.strftime('%d-%m-%Y %H:%M') if d
+    format_date(d)+' '+format_time(d) if d
   end
   
   def format_number(n, precision = 0)

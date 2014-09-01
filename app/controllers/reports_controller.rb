@@ -32,6 +32,10 @@ class ReportsController < ApplicationController
         procedure_params.merge! data: params[:data]
       end
       
+      if params[:pfs]
+        procedure_params.merge! pfs: params[:pfs]
+      end
+      
       @report_data = Report.execute_procedure "#{@master.database}.web.NAFTAPOS_#{@report.name.upcase}", procedure_params 
       
       send @report.name if respond_to? @report.name
@@ -57,6 +61,10 @@ class ReportsController < ApplicationController
 
   def prices
     @report_masts, @report_tovs, @report_data = @report_data
+  end
+  
+  def sync
+    @report_masts, @report_sheds, @report_tasks = @report_data
   end
   
   

@@ -1,0 +1,64 @@
+<div class="row">
+	<div class="col-md-12">
+
+		<table class="table report-table">
+			<thead>
+				<tr align="left">
+					<th rowspan="2">PFS</th>
+					<th rowspan="2">Shedule</th>
+					<th colspan="2"> Last sync </th>
+					<th rowspan="2"> Comments </th>
+				</tr>
+				<tr align="left">
+					<th> Date and time </th>
+					<th> Duration </th>
+				</tr>
+
+			</thead>
+			<tbody>
+				<% @report_masts.each do |b| %>
+				<%
+ sheds = @report_sheds.select{|s| s['bmast_id']==b['bmast_id']}
+          tasks = @report_tasks.select{|t| t['bmast_id']==b['bmast_id']}.sort_by{|t| -(t['edt'].to_i) }
+%>
+				<tr class="data_group1">
+					<td> <%= b['bmast_nm'] %> </td>
+					<td> <% sheds.each do |s| %>
+					<div>
+						<%= s['shed_nm'] %>
+					</div> <% end %> </td>
+					<% last_task = tasks.select{|t| t['succesfull']}.first %>
+					<td class="table-datetime"> <%= format_datetime(last_task['edt']) if last_task %> <div>
+
+					</div> <%= "#{ distance_of_time_in_words(last_task['edt'],Time.now,include_seconds: true)} ago" if last_task && last_task['edt'] %> </td>
+					<td class="table-datetime"> <%= distance_of_time_in_words(last_task['edt'],last_task['sdt'],include_seconds: true) if last_task && last_task['edt'] %> </td>
+					<td class="table-datetime"> <% if b['sync_active'] %>
+					Sync active
+					<% else %>
+					Next sync: <%= format_datetime sheds.map{|s| s['next_run']}.min %>
+					<%= form_for '' do |f| %>
+					<%= f.hidden_field :pfs, value: b['bmast_id']  %>
+					<%= f.submit "Sync now", data: { disable_with: "Sync now" } %>
+					<% end %>
+
+					<% end %> </td>
+				</tr>
+
+				<% tasks.each_with_index do |t,i| %>
+				<tr>
+					<% if i==0 %>
+					<td colspan="2" rowspan="<%= tasks.count %>"></td>
+					<% end %>
+					<td class="table-datetime"> <%= format_datetime(t['edt']) %> </td>
+					<td class="table-datetime"> <%= distance_of_time_in_words(t['edt'],t['sdt'],include_seconds: true) if t['succesfull'] %> </td>
+					<td> <%= t['cmnt'].html_safe if t['cmnt']%> </td>
+
+				</tr>
+
+				<% end %>
+
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

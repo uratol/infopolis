@@ -1,3 +1,14 @@
+var ready;
+ready = function() {
+
+	$('form').submit(function(event) {
+	});
+
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
 function createXmlDocument() {
 	var ret;
 	if (document.implementation && document.implementation.createDocument) {
@@ -63,7 +74,7 @@ function pricesSubmit(form) {
 	}
 
 	$(form).find('#submitData')[0].value = getXmlDocumentString(xmlDoc);
-	
+
 	$(form).find(':radio').prop('disabled', true);
 }
 
