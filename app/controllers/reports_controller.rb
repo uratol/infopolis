@@ -60,11 +60,19 @@ class ReportsController < ApplicationController
   end
 
   def prices
-    @report_masts, @report_tovs, @report_data = @report_data
+    if params[:data]
+      redirect_to
+    else   
+      @report_masts, @report_tovs, @report_data = @report_data
+    end
   end
   
   def sync
-    @report_masts, @report_sheds, @report_tasks = @report_data
+    if params[:pfs]
+       redirect_to
+    else    
+      @report_masts, @report_sheds, @report_tasks = @report_data
+    end
   end
   
   
