@@ -1,0 +1,29 @@
+<%= provide(:title, 'Users\Masters') %>
+
+<div>Masters for <strong><%= @user.name %></strong>
+	</div>
+<%= form_for 'masters' do |f| %>
+<table class="table">
+	<thead>
+		<tr>
+			<th> Name </th>
+			<th> Has access</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @all_masters.each do |m| %>
+		<tr>
+			<td> <%= m.name %> </td>
+			<td> <%= fields_for 'masters[]' , m do |x| %>
+
+			<%= x.check_box :access, checked: @user.master_access(m) %>
+
+			<% end %> </td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<%= f.submit "Save", class: "btn btn-large" %>
+
+<% end %>
+

@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
   
   def index
 
-    @masters = Master.all
+    @masters = current_user.masters
     @master = @masters.find_by_id(params[:master]) || @masters.first
 
     @reports = Report.all

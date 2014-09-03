@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
 
-  resources :users
+  resources :users do
+    member do
+      get 'masters'
+      post 'masters'
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy] 
   resources :masters
   

@@ -1,26 +1,35 @@
 <%= provide(:title, "Users") %>
-<div class="center hero-unit">
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th> Name </th>
-				<th> Email </th>
-				<th> Admin </th>
-				<th> Edit </th>
-				<th> Delete </th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @users.each do |u| %>
-			<tr>
-				<td> <%= u.name %> </td>
-				<td> <%= u.email %> </td>
-				<td> <%= "Yes" if u.admin %> </td>
-				<td> <%= link_to "Edit", edit_user_path(u) %> </td>
-				<td> <%= link_to "Delete", user_path(u), method: :delete %> </td>
-			</tr>
-			<% end %>
-		</tbody>
-	</table>
-  <%= link_to "New user", new_user_path, class: "btn btn-large btn-primary" %>
+<div class="container">
+	<div class="center hero-unit">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th> Name </th>
+					<th> Email </th>
+					<th> Admin </th>
+					<th> Edit </th>
+					<th> Delete </th>
+					<th> Masters </th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.each do |u| %>
+				<tr>
+					<td> <%= u.name %> </td>
+					<td> <%= u.email %> </td>
+					<td> <%= "Yes" if u.admin %> </td>
+					<td> <%= link_to "Edit", edit_user_path(u) %> </td>
+					<td> <%= link_to "Delete", user_path(u), method: :delete %> </td>
+					<td> <% if u.admin %>
+						<%= '<All>' %>
+						<% else %>
+					<%= link_to u.masters.map{|m| m.name}.join(', ').presence || '<add>', masters_user_path(u) %>
+						<% end %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<%= link_to "New user", new_user_path, class: "btn btn-large btn-primary" %>
+	</div>
 </div>

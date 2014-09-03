@@ -26,8 +26,10 @@ class UsersController < ApplicationController
   
   def destroy
     user = User.find params[:id]
-    flash[:success] = "User #{ user_full_name(user) } deleted" 
-    user.destroy!
+    if !user.destroy
+      flash[:danger] = user.errors.full_messages.join
+    end
+    
     redirect_to users_path
   end
   
@@ -35,11 +37,30 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
   end
   
+  def masters
+    @user = User.find params[:id]
+    if params[:masters] && !@user.admin
+      ActiveRecord::Base.transaction do
+        #flash[:info] = params[:masters]
+        params[:masters].each do |master_id, h|
+          if h['access']=='1'
+            @user.user_masters.create(master_id: master_id) unless @user.master_access(master_id)
+          else  
+            UserMaster.destroy_all("user_id=#{@user.id} and master_id=#{master_id}")
+          end
+        end
+      end
+      redirect_to users_path
+    end  
+    #render root_path
+    @all_masters = Master.all
+  end  
+  
   def update
     @user = User.find params[:id]
     
     edit_params = user_params
-    edit_params.except! *[:password, :password_confirmation]  if user_params[:password].blank?
+    edit_params.except! :password, :password_confirmation  if user_params[:password].blank?
     
     if @user.update_attributes(edit_params)
       flash[:success] = "User #{ user_full_name(@user) } updated" 

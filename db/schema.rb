@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814113702) do
+ActiveRecord::Schema.define(version: 20140903091029) do
 
   create_table "masters", force: true do |t|
     t.string   "name"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20140814113702) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_masters", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "master_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_masters", ["master_id"], name: "index_user_masters_on_master_id"
+  add_index "user_masters", ["user_id", "master_id"], name: "index_user_masters_on_user_id_and_master_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "name"
