@@ -32,6 +32,7 @@ class Report < ActiveRecord::Base
       @reports <<  Report.new(id: 3, name: :tanks, caption: "Tanks", filters: [])
       @reports <<  Report.new(id: 4, name: :prices, caption: "Prices", filters: [])
       @reports <<  Report.new(id: 5, name: :sync, caption: "Data sync", filters: [])
+      @reports << Report.new(id: 6, name: :pivot, caption: "Sales pivot", filters: [:daterange]) 
     end  
     @reports
   end

@@ -1,0 +1,19 @@
+<%= javascript_include_tag "pivot" %>
+
+<script type="text/javascript">
+            $(function(){
+                        $("#output").pivotUI(
+        [ 
+            {color: "blue", shape: "circle"}, 
+            {color: "red", shape: "triangle"}
+        ], 
+        { 
+            rows: ["color"], 
+            cols: ["shape"] 
+        }
+    );
+             });
+        </script>
+
+<div id="output" style="margin: 10px;"></div>
+

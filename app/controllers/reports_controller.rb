@@ -49,6 +49,7 @@ class ReportsController < ApplicationController
   end
   
   def sales
+    flash[:info] = @report_data
     @report_masts, @report_fopls, @report_data = @report_data
     def @report_masts.bmast_nm (bmast_id)
       find{|m| m['bmast_id']==bmast_id}['bmast_nm']
@@ -75,6 +76,9 @@ class ReportsController < ApplicationController
     end
   end
   
+  def pivot
+    flash[:info] = "EXEC sg.web.NAFTAPOS_PIVOT @report_name = 'pivot', @user = N'admin', @dt_from = N'2014-09-17', @dt_to = N'2014-09-17'"
+  end
   
   private
     def reports_params
@@ -85,3 +89,4 @@ class ReportsController < ApplicationController
     end
 
 end
+
