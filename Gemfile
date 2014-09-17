@@ -32,8 +32,8 @@ gem 'activerecord-sqlserver-adapter'
 gem 'nokogiri'
 
 
-gem 'momentjs-rails', '>= 2.8.1'
-gem 'bootstrap3-datetimepicker-rails', '~> 3.0.2'
+gem 'momentjs-rails' #, '>= 2.8.1'
+gem 'bootstrap3-datetimepicker-rails' #, '~> 3.0.2'
 gem 'bootstrap-daterangepicker-rails'
 
 
