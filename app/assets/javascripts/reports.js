@@ -100,3 +100,4 @@ function numberValidate(evt) {
 	} else
 		pricesControlChange();
 }
+

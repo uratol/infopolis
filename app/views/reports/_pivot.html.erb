@@ -1,19 +1,29 @@
 <%= javascript_include_tag "pivot" %>
 
-<script type="text/javascript">
+
+
+<%= check_box_tag "pvtCustomize" %>
+<%= label_tag "Customize table" %>
+<div id="output" style="margin: 10px;"></div>
+
+
+
+<%= javascript_tag do %>
             $(function(){
                         $("#output").pivotUI(
-        [ 
-            {color: "blue", shape: "circle"}, 
-            {color: "red", shape: "triangle"}
-        ], 
+         <%= @report_data.to_json.html_safe %>
+        , 
         { 
-            rows: ["color"], 
-            cols: ["shape"] 
+        	<% r = @report_data.first.keys %>
+             rows: <%= ([] << r[11] << r[15] << r[5]).to_json.html_safe %> 
+            ,cols: <%= ([] << r[14] << r[26]).to_json.html_safe %>
+            ,aggregatorName: "Sum"
+            ,vals: ["Продажа"]
         }
     );
              });
-        </script>
 
-<div id="output" style="margin: 10px;"></div>
-
+$('#pvtCustomize').change(function() {
+    $('.pvtAxisContainer, .pvtVals').toggle(this.checked);
+});
+<% end %>
