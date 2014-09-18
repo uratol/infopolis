@@ -54,7 +54,11 @@ gem "chartkick"
 # gem 'debugger', group: [:development, :test]
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'sqlite3'
+gem 'sqlite3', group: :development
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'jquery-ui-rails'
+
+gem 'pg', group: :production
+gem 'rails_12factor', group: :production
+
