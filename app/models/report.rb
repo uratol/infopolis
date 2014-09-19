@@ -25,7 +25,7 @@ class Report < ActiveRecord::Base
   
 
   def self.all
-    unless @reports
+    if @reports.nil? || @reports.empty?
       @reports = Array.new 
       @reports << Report.new(id: 1, name: :sales, caption: "Sales", filters: [:daterange]) 
       @reports << Report.new(id: 2, name: :counters, caption: "Counters", filters: [:daterange])  

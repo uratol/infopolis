@@ -75,7 +75,7 @@ table.pvtTable tr td {
     width: 280px;
     border: 1px solid gray;
     background-color: #fff;
-    position: absolute;
+    position: fixed;
     padding: 20px;
     text-align: center;
 }

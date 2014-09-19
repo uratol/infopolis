@@ -619,7 +619,8 @@ $.fn.pivotUI = (input, inputOpts, overwrite = false, locale="en") ->
                     .append $("<button>").text("OK").bind "click", updateFilter
 
                 showFilterList = (e) ->
-                    valueList.css(left: e.pageX, top: e.pageY).toggle()
+                    valueList.css(left: e.clientX+2, top: e.clientY+2).toggle()
+#                    valueList.css(left: e.pageX, top: e.pageY).toggle()
                     $('.pvtSearch').val('')
                     $('label').show()
 
