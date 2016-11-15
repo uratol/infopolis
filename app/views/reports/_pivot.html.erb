@@ -18,7 +18,7 @@
              rows: <%= ([] << r[11] << r[15] << r[5]).to_json.html_safe %> 
             ,cols: <%= ([] << r[14] << r[26]).to_json.html_safe %>
             ,aggregatorName: "Sum"
-            ,vals: ["Продажа"]
+            ,vals: ["<%= r[2] %>"]
         }
     );
              });

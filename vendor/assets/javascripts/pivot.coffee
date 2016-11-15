@@ -364,6 +364,7 @@ pivotTableRenderer = (pivotData, opts) ->
         th = document.createElement("th")
         th.className = "pvtAxisLabel"
         th.textContent = c
+        
         tr.appendChild th
         for own i, colKey of colKeys
             x = spanSize(colKeys, parseInt(i), parseInt(j))
@@ -480,17 +481,13 @@ $.fn.pivot = (input, opts) ->
     opts = $.extend defaults, opts
 
     result = null
+    pivotData = new PivotData(input, opts)
     try
-        pivotData = new PivotData(input, opts)
-        try
-            result = opts.renderer(pivotData, opts.rendererOptions)
-        catch e
-            console.error(e.stack) if console?
-            result = $("<span>").html opts.localeStrings.renderError
+        result = opts.renderer(pivotData, opts.rendererOptions)
     catch e
         console.error(e.stack) if console?
-        result = $("<span>").html opts.localeStrings.computeError
-    
+        result = $("<span>").html opts.localeStrings.renderError
+
     x = this[0]
     x.removeChild(x.lastChild) while x.hasChildNodes()
     return @append result
@@ -690,7 +687,7 @@ $.fn.pivotUI = (input, inputOpts, overwrite = false, locale="en") ->
                 rendererOptions: opts.rendererOptions
                 cols: [], rows: []
 
-            numInputsToProcess = opts.aggregators[aggregator.val()]([])().numInputs ? 0
+            numInputsToProcess = (opts.aggregators[aggregator.val()]([])()).numInputs ? 0
             vals = []
             @find(".pvtRows li span.pvtAttr").each -> subopts.rows.push $(this).data("attrName")
             @find(".pvtCols li span.pvtAttr").each -> subopts.cols.push $(this).data("attrName")

@@ -33,11 +33,11 @@ production:
 mssql_default: &mssql_default
   adapter: sqlserver
   mode: dblib
-  host: 78.25.23.33
-  port: 6099 
+  host: 109.237.83.116
+  port: 12081
   username: web
   password: ppWeb
-  timeout: 5000 
+  timeout: 5000
 
 mssql_development:
   <<: *mssql_default
