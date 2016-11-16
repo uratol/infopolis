@@ -51,7 +51,7 @@ mssql_development:
   database: sg
 
 mssql_production:
-adapter: sqlserver
+  adapter: sqlserver
   mode: dblib
   host: 127.0.0.1
   port: 1433
