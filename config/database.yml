@@ -23,18 +23,19 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  adapter: sqlite3
   pool: 5
+  timeout: 5000
+  database: db/development.sqlite3
   
 
 mssql_default: &mssql_default
   adapter: sqlserver
   mode: dblib
-  host: 109.237.83.116
-  port: 12081
+  host: 127.0.0.1
+  port: 1433
+#  host: 109.237.83.116
+#  port: 12081
   username: web
   password: ppWeb
   timeout: 5000
