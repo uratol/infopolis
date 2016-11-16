@@ -6,4 +6,7 @@
   <data-source source="LOCAL" name="Rails infopolis: test" uuid="18042de2-0bad-4a04-84e8-ee5ac4df3f47">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
+  <data-source source="LOCAL" name="Rails infopolis: production" uuid="31c4bb71-f219-4565-bcc8-4f3432d3f345">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>

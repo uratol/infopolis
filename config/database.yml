@@ -41,10 +41,22 @@ mssql_default: &mssql_default
   timeout: 5000
 
 mssql_development:
-  <<: *mssql_default
+  adapter: sqlserver
+  mode: dblib
+  host: 109.237.83.116
+  port: 12081
+  username: web
+  password: ppWeb
+  timeout: 5000
   database: sg
 
 mssql_production:
-  <<: *mssql_default
+adapter: sqlserver
+  mode: dblib
+  host: 127.0.0.1
+  port: 1433
+  username: web
+  password: ppWeb
+  timeout: 5000
   database: sg
 
