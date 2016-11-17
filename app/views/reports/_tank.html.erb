@@ -35,17 +35,17 @@
 					<%= format_percent tank_filling %> %
 				</div><a href="#">
 				<div style="position:relative; height:<%= tank_height%>px; width:<%= tank_width%>px;" title="Click to detail">
-					<img src="/assets/tank_empty.png"/>
+                    <%= image_tag 'tank_empty.png'%>
 
 					<% if water_height>0 %>
 					<div style="position:absolute; bottom:<%= tank_border_height %>px; left:<%= tank_border_width %>px">
-						<img src="/assets/tank_water.png" style="height:<%= water_height %>px; width:<%= tank_width - tank_border_width*2 %>px;"/>
+                        <%= image_tag 'tank_water.png', style: "height:#{ water_height }px; width:#{ tank_width - tank_border_width*2 }px; left:#{tank_border_width}px"%>
 					</div>
 					<% end %>
 
 					<% if fuel_height>0 %>
 					<div style="position:absolute; bottom:<%= tank_border_height+water_height %>px; left:<%= tank_border_width %>px">
-						<img src="/assets/tank_fuel.png" style="height:<%= fuel_height %>px; width:<%= tank_width - tank_border_width*2 %>px; left:<%= tank_border_width %>px"/>
+                        <%= image_tag 'tank_fuel.png', style: "height:#{ fuel_height }px; width:#{ tank_width - tank_border_width*2 }px; left:#{tank_border_width}px"%>
 					</div>
 					<% end %>
 					<!--<div style="position:absolute; bottom:{$tank_border_height+$water_height+$book_height}px; left:{$tank_border_width}px">
