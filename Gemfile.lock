@@ -50,6 +50,9 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     daemons (1.2.4)
+    debase (0.2.1)
+      debase-ruby_core_source
+    debase-ruby_core_source (0.9.3)
     erubis (2.7.0)
     eventmachine (1.2.0.1-x86-mingw32)
     execjs (2.7.0)
@@ -177,6 +180,7 @@ DEPENDENCIES
   chartkick
   coffee-rails (~> 4.0.0)
   coffee-script-source (= 1.8.0)
+  debase
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails

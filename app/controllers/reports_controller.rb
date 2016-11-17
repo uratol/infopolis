@@ -19,8 +19,10 @@ class ReportsController < ApplicationController
       today_str = Time.current.to_s :input_date
       @report.daterange = "#{today_str} : #{today_str}" unless @report.daterange
 
-      if reports_params
-        @report.attributes = reports_params
+      reports_filter = reports_params
+      if reports_filter
+        @reports.each{|r| r.attributes = reports_filter}
+        #@report.attributes = reports_filter
       end 
       
       procedure_params = {report_name: @report.name, user: current_user.name}
