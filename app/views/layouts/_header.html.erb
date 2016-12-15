@@ -1,42 +1,52 @@
-<header >
-			<nav>
-				<div class="dropdown navbar navbar-default">
-<div class="navbar-header">
-            <%= link_to image_tag("logo.png", alt: "Logo"), '/' %>
-            
-          </div>
-          
-					<ul class="nav navbar-nav" role="navigation">
+<header>
+  <div class="row roof"></div>
+  <nav>
+    <div class="dropdown navbar navbar-default black">
 
-						<%= render 'layouts/header_menu_item', title: "Home", url: root_path %>
+      <div class="navbar-header">
+        <%#= link_to image_tag("logo.png", alt: "Logo"), '/' %>
+        <div class="vcenter">
+          <span class="logo">INFOPOLIS</span>
+          <span class="logo2">business automation</span>
+        </div>
+      </div>
 
-						<%= render 'layouts/header_menu_item', title: "About", url: about_path %>
+      <ul class="nav navbar-nav navbar-right" role="navigation">
 
-						<% if  signed_in? %>
-						<%= render 'layouts/header_menu_item', title: "Reports", url: '/reports' %>
-						<% else %>
-						<%= render 'layouts/header_menu_item', title: "Sign in", url: signin_path %>
+        <%= render 'layouts/header_menu_item', title: "Home", url: root_path %>
 
-<% if false %>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in... <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<%= render 'layouts/header_menu_item', title: "Sign in via login", url: signin_path %>
-								<li class="divider"></li>
-								<%= render 'layouts/header_menu_item', title: "Sign in via Facebook", url: '/auth/facebook' %>
-							</ul>
-						</li>
-<% end %>						
-						<% end %>
+        <%= render 'layouts/header_menu_item', title: "Решения", url: '#' %>
+        <%= render 'layouts/header_menu_item', title: "Клиенты", url: '#' %>
+        <%= render 'layouts/header_menu_item', title: "Сотрудничество", url: '#' %>
+        <%= render 'layouts/header_menu_item', title: "Контакты", url: '#' %>
 
-						<% if signed_admin? %>
-						<%= render 'layouts/header_menu_item', title: "Users", url: users_path %>
-						<%= render 'layouts/header_menu_item', title: "Masters", url: masters_path %>
-						<% end %>
-                          <% if  signed_in? %>
-                              <%= render 'layouts/header_menu_item', title: "Sign out (<mark>#{ current_user.name }</mark>)".html_safe, url: signout_path, method: "delete" %>
-                          <% end %>
-					</ul>
-				</div>
-			</nav>
+
+        <% if  signed_in? %>
+            <%= render 'layouts/header_menu_item', title: "Reports", url: '/reports' %>
+        <% else %>
+            <%= render 'layouts/header_menu_item', title: "Sign in", url: signin_path %>
+
+            <% if false %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in... <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <%= render 'layouts/header_menu_item', title: "Sign in via login", url: signin_path %>
+                    <li class="divider"></li>
+                    <%= render 'layouts/header_menu_item', title: "Sign in via Facebook", url: '/auth/facebook' %>
+                  </ul>
+                </li>
+            <% end %>
+        <% end %>
+
+        <% if signed_admin? %>
+            <%= render 'layouts/header_menu_item', title: "Users", url: users_path %>
+            <%= render 'layouts/header_menu_item', title: "Masters", url: masters_path %>
+        <% end %>
+        <% if  signed_in? %>
+            <%= render 'layouts/header_menu_item', title: "Sign out (<mark>#{ current_user.name }</mark>)".html_safe, url: signout_path, method: "delete" %>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+  <div class="row roof"></div>
 </header>

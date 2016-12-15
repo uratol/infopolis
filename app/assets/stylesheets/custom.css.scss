@@ -2,13 +2,115 @@
 @import "bootstrap";
 @import 'bootstrap-datetimepicker';
 @import 'daterangepicker-bs3';
+
 /* footer */
 
+body {
+  font-family: Arial;
+  font-size: 10pt;
+}
+
+.roof {
+  background-color: #D5DAE3;
+  height: 20pt;
+}
+
+hr {
+  border-top: 1px solid #aaaaaa;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.black{
+  background-color: black !important;
+  color: #D5DAE3 !important;
+}
+
+.navbar-default, .navbar {
+  background-color: inherit;
+  border-color: inherit;
+  border-radius: inherit;
+  border: none;
+  vertical-align: middle;
+  min-height: inherit;
+  margin: inherit;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-right: 25px;
+}
+
+.navbar-nav > li {
+  a {
+    line-height: 50px;
+    font-family: Arial;
+    font-size: 12pt;
+    color: #D5DAE3 !important;
+    &:hover{
+      color: #ffffff !important;
+    }
+  }
+
+  &.active {
+    a {
+      background-color: #3D3D3D !important;
+      color: #f0f0f0 !important;
+    }
+  }
+}
+
+.navbar-header {
+  vertical-align: middle;
+}
+
+.logo {
+  font-family: Impact;
+  font-size: 20pt;
+  font-style: Italic;
+  color: #D5DAE3;
+  padding: 10pt;
+}
+
+.logo2 {
+  font-family: Impact;
+  font-size: 15pt;
+  font-style: Italic;
+  color: #5180B3;
+  padding: 5pt;
+}
+
+.logo3 {
+  font-family: Impact;
+  font-size: 20pt;
+  font-style: Italic;
+  color: #5180B3;
+}
+
+.menu2 {
+  font-family: Arial;
+  font-size: 10pt;
+  color: #050555;
+}
+
+.menu3 {
+  color: black;
+  background-color: #EEEEEE;
+}
+
+.menu3-col{
+  padding: 25pt;
+}
+
+.button {
+  background-color: #FF8040;
+  text-align: center;
+  font-size: 10pt;
+  font-weight: bolder;
+  color: white;
+  width: inherit;
+  margin: 5pt;
+}
+
 footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #999;
   a {
     color: #555;
     &:hover {
@@ -49,7 +151,7 @@ footer {
   vertical-align: middle;
 }
 
-.table > thead > tr > th{
+.table > thead > tr > th {
   text-align: center
 }
 
