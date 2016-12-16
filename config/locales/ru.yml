@@ -19,5 +19,12 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Привет, мир"
+ru:
+  infopolis_product_short_description: "комплексная автоматизация учета"
+  infopolis_product_long_description: "Полный контроль всех информационных процессов
+        предприятия в одной системе:
+        от звонка клиента до формирования отчетности"
+  help_online: "Справка"
+  call: "Позвонить"
+  mail: "Написать"
+

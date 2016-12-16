@@ -20,4 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  infopolis_product_short_description: "comprehensive accounting automation"
+  infopolis_product_long_description:  |
+    Full control of all information processes Businesses in a single unit:
+    from customer call to generate reports
+  help_online: "Help online"
+  call: "Call"
+  mail: "Mail"
+

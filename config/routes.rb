@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  root 'static_pages#home'
 
   resources :users do
     member do
@@ -7,28 +6,30 @@ Rails.application.routes.draw do
       post 'masters'
     end
   end
-  resources :sessions, only: [:new, :create, :destroy] 
+  resources :sessions, only: [:new, :create, :destroy]
   resources :masters
   
-  match '/about', to: 'static_pages#about', via: 'get'
-  
+
   #match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
-
-
-
-  resources :sessions, only: [:new, :create, :destroy] 
-
-  #get '/reports', to: redirect('/reports/sales')
-  match '/reports', to: 'reports#index', via: 'get'
-  match '/reports/:report_name', to: 'reports#index', via: [:get, :post]
-  match '/reports/:report_name/:master', to: 'reports#index', via: [:get, :post]
-
 
   match '/auth/:service/callback', to: 'services#create', via: [:get, :post]
   get 'auth/failure', to: redirect('/'), via: [:get, :post]
   resources :services, only: [:index, :create]
+
+  scope "(:locale)", :locale => /ua|en|ru/ do
+    root 'static_pages#home'
+
+    match '/signin',  to: 'sessions#new',         via: 'get'
+    match '/signout', to: 'sessions#destroy',     via: 'delete'
+
+    match '/about', to: 'static_pages#about', via: 'get'
+    match '/reports', to: 'reports#index', via: 'get'
+    match '/reports/:report_name', to: 'reports#index', via: [:get, :post]
+    match '/reports/:report_name/:master', to: 'reports#index', via: [:get, :post]
+  end
+
+  #get '/reports', to: redirect('/reports/sales')
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
