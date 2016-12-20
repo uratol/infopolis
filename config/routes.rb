@@ -28,7 +28,12 @@ Rails.application.routes.draw do
     match '/reports/:report_name', to: 'reports#index', via: [:get, :post]
     match '/reports/:report_name/:master', to: 'reports#index', via: [:get, :post]
 
-    match '/:page_name', to: 'static_pages#any', via: :get
+#    match '/:page_name', to: 'static_pages#any', via: :get
+
+    Dir['app/views/static_pages/*.html.erb'].each do |f|
+      s = File.basename(f,'.html.erb')
+      match s, controller: 'static_pages', action: s, via: :get
+    end
   end
 
   #get '/reports', to: redirect('/reports/sales')
