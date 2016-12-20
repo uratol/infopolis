@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   scope "(:locale)", :locale => /ua|en|ru/ do
     root 'static_pages#home'
 
+
     match '/signin',  to: 'sessions#new',         via: 'get'
     match '/signout', to: 'sessions#destroy',     via: 'delete'
 
@@ -26,6 +27,8 @@ Rails.application.routes.draw do
     match '/reports', to: 'reports#index', via: 'get'
     match '/reports/:report_name', to: 'reports#index', via: [:get, :post]
     match '/reports/:report_name/:master', to: 'reports#index', via: [:get, :post]
+
+    match '/:page_name', to: 'static_pages#any', via: :get
   end
 
   #get '/reports', to: redirect('/reports/sales')
