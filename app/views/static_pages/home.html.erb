@@ -3,9 +3,10 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-1"></div>
+      <div class="col-md-4">
       <div class="logo3">
-        Infopolis ERP
+        <br/>Infopolis ERP
         <br/>
         <p class="one-word-per-line">
           <%= t(:infopolis_product_short_description) %>
@@ -14,14 +15,14 @@
       <hr/>
       <%= t(:infopolis_product_long_description) %>
 
-      <div class="button">ПОДРОБНЕЕ</div>
+      <div class="button"><%= t(:infopolis_navigation_erp_details) %></div>
     </div>
     <div class="col-md-4 text-center">
       <%= image_tag 'compass.png' %>
     </div>
     <div class="col-md-2 col-md-offset-1">
       <div class="menu2 text-right">
-        <%= t(:help_online) %><br/><br/>
+        <br/><%= t(:help_online) %><br/>On-line<br/>
         <hr/>
         <%= t(:call) %><br/>
         +38(044)3328898
@@ -42,27 +43,17 @@
 
         <span class="logo3"><%= image_tag 'erp.png' %> ERP</span>
         <hr/>
-        Программный комплекс Инфополис объединяет в себе автоматизацию всех ключевых процессов на предприятии: учет
-        материальных и финансовых ресурсов, кадровый учет и управление трудовыми ресурсами, учет и планирование ресурсов
-        технологического оборудования. Система позволяет получить общую картину состояния всех ресурсов предприятия и
-        обеспечить сбалансированное управление ими.
+        <%= t(:infopolis_erp_short_description) %>
       </div>
       <div class="col-md-4 menu3-col">
         <span class="logo3"><%= image_tag 'crm.png' %> CRM</span>
         <hr/>
-        Элементом системы является модуль CRM, который служит для управления отношениями с клиентами. CRM не является
-        отдельной программой, а работает с теми же справочниками, что и все остальные модули системы, что исключает
-        необходимость процессов импорта/экспорта данных между ними. Задачи работы с клиентом инициируют создание
-        хозяйственных операций, которые в свою очередь могут быть источником взаимодействий с клиентами.
+        <%= t(:infopolis_crm_short_description) %>
       </div>
       <div class="col-md-4 menu3-col">
         <span class="logo3"><%= image_tag 'bpm.png' %> BPM</span>
         <hr/>
-        Автоматизация бизнес-процессов состоит в организации взаимодействия персонала предприятия в рамках
-        формализованной схемы, утверженной руководством. Это позволяет минимизировать влияние человеческого фактора и
-        усилить контроль над выполнением задач. Задачи персонала связаны с хозяйственными операциями, что позволяет
-        автоматизировать обработку операций с ТМЦ, отслеживание состояния запасов, управление работой персонала -
-        менеджеров, работников склада и производства.
+        <%= t(:infopolis_bpm_short_description) %>
       </div>
     </div>
   <div class="row roof"></div>
