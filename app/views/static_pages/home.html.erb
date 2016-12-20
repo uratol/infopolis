@@ -14,15 +14,21 @@
       </div>
       <hr/>
       <%= t(:infopolis_product_long_description) %>
+      <div align="right">
+        <%= link_to static_page(:infopolis_erp) do %>
 
-      <div class="button"><%= t(:infopolis_navigation_erp_details) %></div>
+          <span class="button" style="padding-left: 5pt; padding-right: 5pt; padding-bottom: 3pt; padding-top: 3pt">
+            <%= t(:infopolis_navigation_erp_details) %>
+          </span>
+        <% end %>
+      </div>
     </div>
     <div class="col-md-4 text-center">
       <%= image_tag 'compass.png' %>
     </div>
     <div class="col-md-2 col-md-offset-1">
-      <div class="menu2 text-right">
-        <br/><%= t(:help_online) %><br/>On-line<br/>
+      <div class="menu2 align-r" style="margin-top: 25pt; margin-right: -10pt">
+        <%= t(:help_online) %><br/>On-line<br/>
         <hr/>
         <%= t(:call) %><br/>
         +38(044)3328898
@@ -34,6 +40,7 @@
         Fedchenko_Andrey
         <hr/>
         </font>
+        </span>
       </div>
     </div>
   </div>
@@ -41,17 +48,17 @@
   <div class="row menu3">
       <div class="col-md-4 menu3-col">
 
-        <span class="logo3"><%= image_tag 'erp.png' %> ERP</span>
+        <div class="logo3 align-c"><%= image_tag 'erp.png' %> ERP</div>
         <hr/>
         <%= t(:infopolis_erp_short_description) %>
       </div>
       <div class="col-md-4 menu3-col">
-        <span class="logo3"><%= image_tag 'crm.png' %> CRM</span>
+        <div class="logo3 align-c"><%= image_tag 'crm.png' %> CRM</div>
         <hr/>
         <%= t(:infopolis_crm_short_description) %>
       </div>
       <div class="col-md-4 menu3-col">
-        <span class="logo3"><%= image_tag 'bpm.png' %> BPM</span>
+        <div class="logo3 align-c"><%= image_tag 'bpm.png' %> BPM</div>
         <hr/>
         <%= t(:infopolis_bpm_short_description) %>
       </div>
