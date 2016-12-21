@@ -47,7 +47,7 @@ hr {
     color: #D5DAE3 !important;
     &:hover{
       color: #ffffff !important;
-    }
+      text-decoration: none;}
   }
 
   &.active {
@@ -57,6 +57,13 @@ hr {
     }
   }
 }
+
+A:link {
+  text-decoration: none; /* Убирает подчеркивание для ссылок */
+}
+A:visited { text-decoration: none; }
+A:active { text-decoration: none; }
+
 p {
   text-indent: 25px;
 }
@@ -137,10 +144,13 @@ p {
   background-color: #FF8040;
   text-align: center;
   font-size: 10pt;
-  font-weight: bolder;
-  color: white;
+  font-weight: bold;
+  color: #E0E0E0;
   width: inherit;
   margin: 5pt;
+}
+.button:hover {
+  color: white;
 }
 
 footer {
