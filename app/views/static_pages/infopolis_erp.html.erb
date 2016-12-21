@@ -1,16 +1,24 @@
-<% provide :title, 'Home' %>
+<% provide :title, 'ERP' %>
 
 
 <div class="container">
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-7">
-      <div class="logo3">ERP</div>
+      <div class="logo3" style="margin-top: 25pt">ERP</div>
       <%= t(:infopolis_erp_long_description).html_safe %>
-      <div class="logo3">CRM&BPM</div>
+      <div class="logo3" style="margin-top: 25pt">CRM&BPM</div>
       <%= t(:infopolis_CRM_BPM_long_description).html_safe %>
     </div>
-    <div class="col-md-4">789</div>
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <div class="logo4" style="margin-top: 25pt; text-align: right"><%= t(:infopolis_erp_how).html_safe %></div>
+      <div class="right_column"><%= t(:infopolis_erp_how_details).html_safe %></div>
+      <div class="logo4" style="margin-top: 25pt; text-align: right"><%= t(:infopolis_erp_for).html_safe %></div>
+      <div class="right_column"><%= t(:infopolis_erp_for_details).html_safe %></div>
+      <div class="logo4" style="margin-top: 25pt; text-align: right"><%= t(:infopolis_erp_for_small).html_safe %></div>
+      <div class="right_column"><%= t(:infopolis_erp_for_small_details).html_safe %></div>
+    </div>
   </div>
   <div class="row roof"></div>
 </div>

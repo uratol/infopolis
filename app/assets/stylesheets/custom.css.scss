@@ -57,6 +57,9 @@ hr {
     }
   }
 }
+p {
+  text-indent: 25px;
+}
 
 .navbar-header {
   vertical-align: middle;
@@ -96,6 +99,20 @@ hr {
 .logo3 {
   font-family: Impact;
   font-size: 20pt;
+  font-style: Italic;
+  color: #5180B3;
+  vertical-align: middle;
+}
+
+.right_column {
+  font-family: Arial;
+  font-size: 9pt;
+  font-style: Italic;
+
+}
+.logo4 {
+  font-family: Impact;
+  font-size: 15pt;
   font-style: Italic;
   color: #5180B3;
   vertical-align: middle;
