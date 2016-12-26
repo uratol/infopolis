@@ -22,17 +22,17 @@
 
         <%= render 'layouts/header_menu_item', title: "Home", url: root_path %>
 
-        <li class="dropdown">
+        <!--<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Решения <b class="caret"></b></a>
           <ul class="dropdown-menu black">
             <%= render 'layouts/header_menu_item', title: "ERP", url: static_page(:infopolis_erp) %>
             <li class="divider"></li>
             <%= render 'layouts/header_menu_item', title: "CRM", url: static_page(:infopolis_erp) %>
           </ul>
-        </li>
+        </li>-->
 
 
-        <%= render 'layouts/header_menu_item', title: "Клиенты", url: '#' %>
+        <%= render 'layouts/header_menu_item', title: "Решения", url: static_page(:infopolis_solutions) %>
         <%= render 'layouts/header_menu_item', title: "Сотрудничество", url: '#' %>
         <%= render 'layouts/header_menu_item', title: "Контакты", url: '#' %>
 
