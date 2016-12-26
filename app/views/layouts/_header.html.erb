@@ -1,14 +1,21 @@
 <header>
-  <div class="row roof"></div>
+  <div class="row roof">
+    <div>
+      <%= link_to('[ua]', locale: 'ua') %>
+      <%= link_to('[en]', locale: 'en') %>
+      <%= link_to('[ru]', locale: 'ru') %>
+    </div>
+  </div>
   <nav>
     <div class="dropdown navbar navbar-default black">
 
       <div class="navbar-header">
-        <%#= link_to image_tag("logo.png", alt: "Logo"), '/' %>
-        <div style="margin-top: 15pt; margin-bottom: 15pt; margin-left: 20pt">
-          <span class="logo">INFOPOLIS</span>
-          <span class="logo2">business automation</span>
-        </div>
+        <%= link_to root_path do %>
+            <div style="margin-top: 15pt; margin-bottom: 15pt; margin-left: 20pt">
+              <span class="logo">INFOPOLIS</span>
+              <span class="logo2">business automation</span>
+            </div>
+        <% end %>
       </div>
 
       <ul class="nav navbar-nav navbar-right" role="navigation">
