@@ -39,23 +39,32 @@ hr {
   padding-right: 25px;
 }
 
-.navbar-nav > li {
-  a {
-    line-height: 50px;
-    font-family: Arial;
-    font-size: 12pt;
-    color: #D5DAE3 !important;
-    &:hover{
-      color: #ffffff !important;
-      text-decoration: none;}
-  }
+.navbar-nav{
+  > li {
+      a {
+        line-height: 50px;
+        font-family: Arial;
+        font-size: 12pt;
+        color: #D5DAE3 !important;
+        &:hover{
+          color: #ffffff !important;
+          background-color: #3D3D3D !important;
+          text-decoration: none;}
+      }
 
-  &.active {
-    a {
-      background-color: #3D3D3D !important;
-      color: #f0f0f0 !important;
-    }
+      &.active{
+        a {
+          background-color: #3D3D3D !important;
+          color: #f0f0f0 !important;
+        }
+      }
   }
+}
+
+.nav .open > a{
+  background-color: #3D3D3D !important;
+  color: #f0f0f0 !important;
+
 }
 
 A:link {
