@@ -164,7 +164,11 @@ p {
 .menu3-col{
   padding: 25pt;
 }
-
+.extable > tbody > tr > td {
+  padding: 2px 2px 2px 2px;
+  vertical-align: top;
+  font-size: 8pt;
+}
 .button {
   background-color: #FF8040;
   text-align: center;

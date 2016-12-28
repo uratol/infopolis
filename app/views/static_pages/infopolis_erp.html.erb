@@ -4,14 +4,20 @@
 <div class="container">
   <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-7">
+    <div class="col-md-6">
       <div class="logo3" style="margin-top: 25pt">ERP</div>
       <%= t(:infopolis_erp_long_description).html_safe %>
       <div class="logo3" style="margin-top: 25pt">CRM&BPM</div>
-      <%= t(:infopolis_CRM_BPM_long_description).html_safe %>
+      <%= t(:infopolis_CRM_BPM_long_description1).html_safe %>
+      <div style="text-align: right">
+      <%= link_to static_page(:infopolis_crm_bpm_example) do %>
+            <%= t(:infopolis_navigation_crm_bpm_example) %>
+      <% end %>
+      </div>
+      <%= t(:infopolis_CRM_BPM_long_description2).html_safe %>
     </div>
     <div class="col-md-1"></div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="logo4" style="margin-top: 25pt; text-align: right"><%= t(:infopolis_erp_how).html_safe %></div>
       <div class="right_column"><%= t(:infopolis_erp_how_details).html_safe %></div>
       <div class="logo4" style="margin-top: 25pt; text-align: right"><%= t(:infopolis_erp_for).html_safe %></div>
