@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def request_locale
-    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).find{|s| I18n.locale_available?(s)}
   end
 
 end

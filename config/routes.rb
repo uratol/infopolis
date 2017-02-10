@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/'), via: [:get, :post]
   resources :services, only: [:index, :create]
 
-  scope "(:locale)", :locale => /ua|en|ru/ do
+  scope "(:locale)", :locale => /uk|en|ru/ do
     root 'static_pages#home'
 
 
