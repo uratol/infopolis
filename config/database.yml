@@ -48,7 +48,7 @@ mssql_development:
   username: web
   password: ppWeb
   timeout: 5000
-  database: sg
+  database: inf
 
 mssql_production:
   adapter: sqlserver
@@ -58,5 +58,5 @@ mssql_production:
   username: web
   password: ppWeb
   timeout: 5000
-  database: sg
+  database: inf
 

@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   scope "(:locale)", :locale => /uk|en|ru/ do
     root 'static_pages#home'
 
-
     match '/signin',  to: 'sessions#new',         via: 'get'
     match '/signout', to: 'sessions#destroy',     via: 'delete'
 
@@ -33,6 +32,12 @@ Rails.application.routes.draw do
     Dir['app/views/static_pages/*.html.erb'].each do |f|
       s = File.basename(f,'.html.erb')
       match s, controller: 'static_pages', action: s, via: :get
+    end
+
+    resources 'download', only: [:index] do
+      member do
+        post 'download'
+      end
     end
   end
 

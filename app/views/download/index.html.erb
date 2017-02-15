@@ -1,0 +1,25 @@
+<%= provide(:title, "Downloads") %>
+<div class="center hero-unit">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th> Description </th>
+      <th> File name </th>
+      <th> Version </th>
+      <th> Size </th>
+      <th> Download </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @download.each do |f| %>
+        <tr>
+          <td> <%= f.cmnt %> </td>
+          <td> <%= f.sgfile_nm %> </td>
+          <td> <%= f.vers %> </td>
+          <td> <%= number_to_human_size(f.size) %> </td>
+          <td> <%= link_to "Download", download_download_path(f), method: :post %> </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

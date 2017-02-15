@@ -35,6 +35,7 @@
         <%= render 'layouts/header_menu_item', title: "Решения", url: static_page(:infopolis_solutions) %>
         <%= render 'layouts/header_menu_item', title: "Сотрудничество", url: '#' %>
         <%= render 'layouts/header_menu_item', title: "Контакты", url: '#' %>
+        <%= render 'layouts/header_menu_item', title: "Скачать", url: url_for(controller: :download, action: :index) %>
 
 
         <% if  signed_in? %>
