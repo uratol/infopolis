@@ -1,7 +1,7 @@
 <header>
   <div class="row roof">
     <div>
-      <%= link_to('[ua]', locale: 'ua') %>
+      <%= link_to('[uk]', locale: 'uk') %>
       <%= link_to('[en]', locale: 'en') %>
       <%= link_to('[ru]', locale: 'ru') %>
     </div>
@@ -20,7 +20,7 @@
 
       <ul class="nav navbar-nav navbar-right" role="navigation">
 
-        <%= render 'layouts/header_menu_item', title: "Home", url: root_path %>
+        <%= render 'layouts/header_menu_item', title: t(:home), url: root_path %>
 
         <!--<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Решения <b class="caret"></b></a>
@@ -32,10 +32,10 @@
         </li>-->
 
 
-        <%= render 'layouts/header_menu_item', title: "Решения", url: static_page(:infopolis_solutions) %>
-        <%= render 'layouts/header_menu_item', title: "Сотрудничество", url: '#' %>
-        <%= render 'layouts/header_menu_item', title: "Контакты", url: '#' %>
-        <%= render 'layouts/header_menu_item', title: "Скачать", url: url_for(controller: :download, action: :index) %>
+        <%= render 'layouts/header_menu_item', title: t(:solutions), url: static_page(:infopolis_solutions) %>
+        <%= render 'layouts/header_menu_item', title: t(:coop), url: '#' %>
+        <%= render 'layouts/header_menu_item', title: t(:contacts), url: '#' %>
+        <%= render 'layouts/header_menu_item', title: t(:download), url: url_for(controller: :download, action: :index) %>
 
 
         <% if  signed_in? %>
