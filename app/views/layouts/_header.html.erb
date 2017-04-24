@@ -33,8 +33,8 @@
 
 
         <%= render 'layouts/header_menu_item', title: t(:solutions), url: static_page(:infopolis_solutions) %>
-        <%= render 'layouts/header_menu_item', title: t(:coop), url: '#' %>
-        <%= render 'layouts/header_menu_item', title: t(:contacts), url: '#' %>
+        <%= render 'layouts/header_menu_item', title: t(:coop), url: static_page(:infopolis_coop) %>
+        <%= render 'layouts/header_menu_item', title: t(:SmallBusinessERP), url: static_page(:infopolis_SmallBusinessERP) %>
         <%= render 'layouts/header_menu_item', title: t(:download), url: url_for(controller: :download, action: :index) %>
 
 
