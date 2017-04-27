@@ -20,6 +20,7 @@ uk:
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
+
   infopolis_product_short_description: "комплексна автоматизація обліку"
   infopolis_product_long_description: "Повний контроль всіх информаційних процесів
         підприємства в одній системі:
@@ -33,6 +34,9 @@ uk:
   solutions: "Рішення"
   SmallBusinessERP: "ERP-Малий Бізнес"
   download: "Завантажити"
+
+  video: |
+    Відеопрезентація<br/>і навчальні матеріали
 
   infopolis_SmallBusinessERP_header01: |
     InfopolisERP-SB<br/>
@@ -224,7 +228,7 @@ uk:
     <P> Можливість друку цінників, механізм відкладеного застосування нових цін при заміні цінників. </P>
     <P> Друк видаткових накладних, товарних чеків, підключення касових апаратів (фіскальних реєстраторів) і друк фіскальних чеків.</P>
 
-  infopolis_solutions_insurance_title: "Страховое агентство"
+  infopolis_solutions_insurance_title: "Страхове агентство"
 
   infopolis_solutions_insurance: |
      <P> Автоматизація обліку договорів страхування, додаткових угод, графіків оплат. </P>

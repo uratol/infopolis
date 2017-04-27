@@ -28,7 +28,10 @@
     </div>
     <div class="col-md-2 col-md-offset-1">
       <div class="menu2 align-r" style="margin-top: 25pt; margin-right: -10pt">
-        <%= t(:help_online) %><br/>On-line<br/>
+        <%= link_to static_page(:infopolis_video) do %>
+            <%= t(:video).html_safe %><br/>
+        <% end %>
+
         <hr/>
         <%= t(:call) %><br/>
         +38(044)3328898
@@ -39,6 +42,9 @@
         Skype<br/>
         Fedchenko_Andrey
         <hr/>
+        <%= link_to static_page(:infopolis_sitemap) do %>
+            <%= image_tag 'sitemap.png', size: "50x30" %>
+            <% end %>
         </font>
         </span>
       </div>
