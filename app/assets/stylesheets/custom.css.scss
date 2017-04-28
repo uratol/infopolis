@@ -24,6 +24,8 @@ hr {
 
 .icon {
   height: 30pt;
+  float: left;
+  margin-right: 20px;
 }
 
 .iconbig {
@@ -103,6 +105,10 @@ A:active { text-decoration: none; }
 
 p {
   text-indent: 25px;
+}
+
+.p1 {
+  text-indent: 0px;
 }
 
 .navbar-header {
