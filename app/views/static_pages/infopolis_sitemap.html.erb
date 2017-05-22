@@ -5,13 +5,55 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-4">
-      <div class="logo4" style="margin-top: 25pt; text-align: right"><%= t(:video_header).html_safe %></div>
-      <div class="right_column"><%= t(:video_header_txt).html_safe %></div>
+      <div class="logo4" style="margin-top: 25pt; text-align: right"><%= t(:sitemap).html_safe %></div>
+
+      <%= link_to static_page(:home) do %>
+          <div class="sitemap" style="margin-top: 25pt;margin-left: 0pt; text-align: left">
+            <%= t(:home) %>
+          </div>
+      <% end %>
+
+
+      <%= link_to static_page(:infopolis_erp) do %>
+          <div class="sitemap" style="margin-top: 5pt;margin-left: 15pt; text-align: left">
+            <%= t(:infopolis_navigation_erp_details) %>
+          </div>
+      <% end %>
+
+      <%= link_to static_page(:infopolis_video) do %>
+          <div class="sitemap" style="margin-top: 5pt;margin-left: 15pt; text-align: left">
+            <%= t(:video_header) %>
+          </div>
+      <% end %>
+
+      <%= link_to static_page(:infopolis_solutions) do %>
+          <div class="sitemap" style="margin-top: 5pt;margin-left: 0pt; text-align: left">
+            <%= t(:solutions) %>
+          </div>
+      <% end %>
+
+      <%= link_to static_page(:infopolis_coop) do %>
+          <div class="sitemap" style="margin-top: 5pt;margin-left: 0pt; text-align: left">
+            <%= t(:coop) %>
+          </div>
+      <% end %>
+
+      <%= link_to static_page(:infopolis_SmallBusinessERP) do %>
+          <div class="sitemap" style="margin-top: 5pt;margin-left: 0pt; text-align: left">
+            <%= t(:SmallBusinessERP) %>
+          </div>
+      <% end %>
+
+      <%= link_to  url_for(controller: :download, action: :index) do %>
+          <div class="sitemap" style="margin-top: 5pt;margin-left: 0pt; text-align: left">
+            <%= t(:download) %>
+          </div>
+      <% end %>
+
     </div>
     <div class="col-md-1"></div>
     <div class="col-md-6">
-      <div class="logo4" style="margin-top: 25pt; text-align: right"><%= t(:video_owerview).html_safe %></div>
-      <div class="right_column"><%= t(:video_owerview_txt).html_safe %></div>
+
     </div>
   </div>
   <div class="row roof"></div>
